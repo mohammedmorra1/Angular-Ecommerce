@@ -1,0 +1,1 @@
+export const supabaseKey = "SUPABASE_ANON_KEY"
