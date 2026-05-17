@@ -1,0 +1,27 @@
+<body style="background-color: black;">
+  <main class="container py-5 text-white bg-black">
+    <div class="mb-4">
+
+      <p class="text-uppercase small fw-bold mb-2" style="letter-spacing:3px; color:#22ff00;">
+        Catalogue
+      </p>
+
+      <h1 class="display-5 fw-bold mb-3">
+        Everything
+      </h1>
+
+      <app-tabs (selectedCategory)="selector($event)"></app-tabs>
+    </div>
+
+
+    <div class="row g-4">
+
+      @for (item of products(); track item.id) {
+        <div class="col-6 col-md-4 col-lg-3">
+          <app-card [cardProduct]="item"></app-card>
+        </div>
+      }
+
+    </div>
+  </main>
+</body>
