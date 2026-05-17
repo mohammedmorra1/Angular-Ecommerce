@@ -1,0 +1,164 @@
+<body style="background-color: black;">
+<section class="container-fluid bg-black text-white">
+
+  <div class="row min-vh-100">
+
+    <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
+      <p class="text-uppercase small text-secondary">
+        Drop 04 — Live now
+      </p>
+
+      <h1  class="display-1 fw-bold lh-1 hero-title">
+        BUILT<br>
+        FOR THE<br>
+        <span style="color:#22ff00" class="fst-italic text-neon fst-italic">after</span>dark.
+      </h1>
+
+      <p class="text-secondary mt-3">
+        Brutalist silhouettes, technical fabrics, neon aesthetic.
+      </p>
+
+      <div class="d-flex gap-3 mt-4">
+        <a style="background-color:#22ff00" class="btn px-4 py-3 fw-bold" routerLink="/shop">
+          Shop the drop
+        </a>
+
+        <a class="btn btn-outline-light px-4 py-3" routerLink="/stylist">
+          AI Stylist
+        </a>
+      </div>
+
+    </div>
+
+    <div class="col-lg-6 p-0">
+      <img src="./images/hero.jpg"
+           class="img-fluid h-100 w-100 object-fit-cover" />
+    </div>
+
+  </div>
+
+  <div class="text-black py-2 overflow-hidden position-absolute bottom-0 start-0 w-100 slide">
+
+    <div class="marquee-wrapper">
+      <div class="marquee">
+        <span>NEW DROP ✦ </span>
+        <span>FREE SHIPPING ✦ </span>
+        <span>AI STYLIST ✦ </span>
+        <span>MEMBERS GET 10% OFF ✦ </span>
+        <span>VISUAL SEARCH BETA ✦ </span>
+        <span>NEW SEASON DROP ✦ </span>
+        <span>NEW DROP ✦ </span>
+        <span>FREE SHIPPING ✦ </span>
+        <span>AI STYLIST ✦ </span>
+        <span>MEMBERS GET 10% OFF ✦ </span>
+        <span>VISUAL SEARCH BETA ✦ </span>
+        <span>NEW SEASON DROP ✦ </span>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="container py-5">
+  <div class="row g-4">
+    <div class="col-12 col-md-4">
+      <a href="/stylist"
+        class="d-block border border-dark p-4 h-100 text-decoration-none text-white hover-card">
+
+        <i class="bi bi-stars fs-4" style="color: #22ff00;"></i>
+
+        <h3 class="mt-4 fw-bold">
+          AI Stylist
+        </h3>
+
+        <p class="mt-2 small" style="color:rgba(245, 245, 220, 0.572) ;">
+          Tell it the occasion. Get a head-to-toe look from real inventory.
+        </p>
+
+        <p class="mt-4 small text-uppercase fw-bold d-inline-flex align-items-center gap-1">
+          Open <i class="bi bi-arrow-right"></i>
+        </p>
+
+      </a>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <a href="/visual-search"
+         class="d-block border border-dark p-4 h-100 text-decoration-none text-white hover-card">
+
+        <i class="bi bi-camera fs-4" style="color: #22ff00;"></i>
+
+        <h3 class="mt-4 fw-bold">
+          Visual Search
+        </h3>
+
+        <p class="mt-2 small" style="color:rgba(245, 245, 220, 0.572) ;">
+          Drop an image. We surface the closest pieces in our drop.
+        </p>
+
+        <p class="mt-4 small text-uppercase fw-bold d-inline-flex align-items-center gap-1">
+          Open <i class="bi bi-arrow-right"></i>
+        </p>
+
+      </a>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <a href="/auth"
+         class="d-block border border-dark p-4 h-100 text-decoration-none text-white hover-card">
+
+        <i class="bi bi-shield-check fs-4" style="color: #22ff00;"></i>
+
+        <h3 class="mt-4 fw-bold">
+          Members Vault
+        </h3>
+
+        <p class="mt-2 small" style="color:rgba(245, 245, 220, 0.572)">
+          Sign in to save fits, track orders, get early drops.
+        </p>
+
+        <p class="mt-4 small text-uppercase fw-bold d-inline-flex align-items-center gap-1">
+          Open <i class="bi bi-arrow-right"></i>
+        </p>
+
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="container py-5">
+  <div class="d-flex justify-content-between align-items-end mb-4">
+
+    <div>
+      <p class="text-uppercase small mb-1" style="letter-spacing:3px; color:#39ff14;">
+        Featured
+      </p>
+
+      <h2 class="display-4 fw-bold text-white mb-0">
+        The drop.
+      </h2>
+    </div>
+
+    <a 
+      routerLink="/shop"
+      class="d-none d-md-inline-flex align-items-center gap-1 text-decoration-none text-white small text-uppercase fw-bold"
+      style="letter-spacing:2px;"
+    >
+      View all
+      <i class="bi bi-arrow-right"></i>
+    </a>
+  </div>
+
+  <div class="row g-4">
+
+    @for (item of homeProducts(); track item.id) {
+      <div class="col-6 col-md-4 col-lg-3">
+        <app-card [cardProduct]="item"></app-card>
+      </div>
+    }
+
+  </div>
+</section>
+
+</body>
