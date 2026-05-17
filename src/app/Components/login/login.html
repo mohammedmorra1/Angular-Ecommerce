@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+
+    <body class="bg-dark d-flex justify-content-center align-items-center">
+
+        <div class="rounded border border-light w-25 h-50 d-flex justify-content-center align-items-center">
+            <form (submit)="Login()">
+                <label class="form-label text-light" for="username">Username</label>
+                <input class="form-control" name="username" [(ngModel)]="username">
+
+                <label class="form-label text-light" for="password">Password</label>
+                <input class="form-control" name="password" [(ngModel)]="password" type="password">
+                
+                <button type="submit" class="btn btn-primary mt-2">Log in</button>
+            </form>
+
+        </div>
+
+    </body>
+
+</html>
