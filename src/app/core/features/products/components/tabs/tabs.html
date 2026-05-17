@@ -1,0 +1,11 @@
+<div class="d-flex flex-wrap gap-2">
+
+  <div class="tab-btn" [class.active]="selected === 'all'" (click)="select('all')">All</div>
+
+  <div class="tab-btn" [class.active]="selected === 'men'" (click)="select('men')">Men</div>
+
+  <div class="tab-btn" [class.active]="selected === 'kids'" (click)="select('kids')">Kids</div>
+
+  <div class="tab-btn" [class.active]="selected === 'women'" (click)="select('women')">Women</div>
+
+</div>
