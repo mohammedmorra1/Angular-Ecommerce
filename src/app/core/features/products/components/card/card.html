@@ -3,8 +3,9 @@
     <div class="position-relative overflow-hidden">
 
         <img
-            src={{cardProduct.imageUrl}}
-            alt={{ cardProduct.title }}
+            [src]="cardProduct.imageUrl"
+            [alt]="cardProduct.title"
+            loading="lazy"
             class="card-img-top product-img">
 
         <div class="quick-view">

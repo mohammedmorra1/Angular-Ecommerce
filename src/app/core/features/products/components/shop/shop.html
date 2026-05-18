@@ -22,4 +22,12 @@
       }
 
     </div>
+
+    @if(hasMore()){
+      <div class="text-center mt-4">
+        <button (click)="loadMore()" class="btn px-4 py-2 fw-bold" style="background-color:#22ff00; color:black;">
+          Load More
+        </button>
+      </div>
+    }
   </main>

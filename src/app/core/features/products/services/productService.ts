@@ -34,12 +34,30 @@ export class ProductService
   http = inject(HttpClient);
   products = signal<Product[]>([]);
   category = signal<string>("All");
+  page = signal<number>(1);
+  limit = signal<number>(8);
+  hasMore = signal<boolean>(true);
 
-  getProducts() {
-    this.http.get<Product[]>(this.baseUrl).subscribe((response :any) => {
+  getHomeProducts() {
+    this.http.get<any>(`${this.baseUrl}?limit=8`).subscribe((response :any) => {
       const mappedProducts = response.data.map((apiProduct: any) => this.mapProduct(apiProduct));
       this.products.set(mappedProducts);
     });
+  }
+
+  getProducts() {
+    this.http.get<any>(`${this.baseUrl}?page=${this.page()}&limit=${this.limit()}`).subscribe((response :any) => {
+      const mappedProducts = response.data.map((apiProduct: any) => this.mapProduct(apiProduct));
+      this.products.update(prev => [...prev, ...mappedProducts]);
+      if (mappedProducts.length < this.limit()) {
+        this.hasMore.set(false);
+      }
+    });
+  }
+
+  loadMore() {
+    this.page.update(p => p + 1);
+    this.getProducts();
   }
 
   filteration = computed(()=>{
@@ -60,6 +78,5 @@ export class ProductService
         return products;
       }
       
-  }
-  )
+  })
 }

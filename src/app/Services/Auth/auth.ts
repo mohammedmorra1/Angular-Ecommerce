@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../../Types/User';
-import * as cryptoJS from 'crypto-js';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../../environments/environment';
 
@@ -8,7 +7,6 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-
 
   private client: SupabaseClient;
 
@@ -18,11 +16,17 @@ export class AuthService {
       environment.supabaseKey
     );
   }
-  
+
+  private async hashPassword(password: string): Promise<string> {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  }
 
   async AddUser(user : User){
-
-      user.password = cryptoJS.SHA256(user.password).toString();
+      user.password = await this.hashPassword(user.password);
 
       const ret = await this.client.from('Users').insert({
             id : user.id,
@@ -36,15 +40,13 @@ export class AuthService {
   }
 
   async CheckUser(username : string , password : string){
-
-    password = cryptoJS.SHA256(password).toString();
+    const hashedPassword = await this.hashPassword(password);
 
     const {data , error} = await this.client.from('Users').select('*')
     .eq('username' , username)
-    .eq('password' , password).single();
+    .eq('password' , hashedPassword).single();
 
     return data;
   }
 
 }
-

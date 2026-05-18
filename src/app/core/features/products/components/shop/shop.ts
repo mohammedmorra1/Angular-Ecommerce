@@ -14,8 +14,9 @@ export class Shop {
 
   products = computed(() =>{
     return this.productService.filteration();
-  }
-  )
+  })
+
+  hasMore = computed(() => this.productService.hasMore())
 
   ngOnInit() {
     this.productService.getProducts();
@@ -24,5 +25,9 @@ export class Shop {
   selector(category: string)
   {
     this.productService.category.set(category);
+  }
+
+  loadMore() {
+    this.productService.loadMore();
   }
 }

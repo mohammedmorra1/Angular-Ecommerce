@@ -1,9 +1,5 @@
 import { Routes } from '@angular/router';
-import { Login } from './Components/login/login';
-import { Signup } from './Components/signup/signup';
 import { authGuard } from './Guard/auth-guard';
-import { Home } from './core/features/products/components/home/home';
-import { Shop } from './core/features/products/components/shop/shop';
 
 export const routes: Routes = [
     {
@@ -13,19 +9,19 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        component: Home
+        loadComponent: () => import('./core/features/products/components/home/home').then(m => m.Home)
     },
     {
         path: 'shop',
-        component: Shop
+        loadComponent: () => import('./core/features/products/components/shop/shop').then(m => m.Shop)
     },
     {
         path: 'login',
-        component: Login
+        loadComponent: () => import('./Components/login/login').then(m => m.Login)
     },
     {
         path: 'signup',
-        component: Signup
+        loadComponent: () => import('./Components/signup/signup').then(m => m.Signup)
     },
     {
         path: '**',

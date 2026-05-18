@@ -19,7 +19,7 @@ export class Home {
   })
 
   ngOnInit() {
-    this.productService.getProducts();
+    this.productService.getHomeProducts();
   }
   
 }
