@@ -12,7 +12,7 @@ export class StylistSearchService {
 
   private async ensureProductsLoaded(): Promise<void> {
     if (!this.productService.products().length) {
-      await this.productService.getProducts();
+      await this.productService.getProductsAsync();
     }
   }
 
