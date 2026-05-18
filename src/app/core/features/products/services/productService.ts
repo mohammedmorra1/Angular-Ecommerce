@@ -17,7 +17,7 @@ export class ProductService
       currentPrice: apiProduct.price,
       oldPrice: apiProduct.oldPrice,
       description: apiProduct.description,
-      imageUrl: apiProduct.image,
+      imageUrl: `${apiProduct.image}?auto=compress&cs=tinysrgb&w=400`,
       availableSizes: apiProduct.size,
       tags:[
       '#streetwear',
