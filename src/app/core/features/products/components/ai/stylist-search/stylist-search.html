@@ -1,0 +1,69 @@
+<body style="background-color: black">
+  <main class="container text-white bg-black w-50 m-auto">
+    <p style="color: #22ff00"><i class="bi bi-stars"></i> AI Stylist</p>
+    <p class="fs-1 fw-bold my-0 py-0">What's the occasion?</p>
+    <p style="color: gray">Describe the vibe — your fit will appear.</p>
+
+    @if (searchTexts.length > 0) {
+      <div class="chat-history mt-4" #chatHistory>
+        @for (text of searchTexts; track $index) {
+          <div class="chat-message">
+            <div class="chat-query">
+              <div class="query-bubble">{{ text }}</div>
+            </div>
+            <div class="chat-response">
+              <div class="response-line"></div>
+              <div class="response-bubble">
+                @if (searchResults[text] === null) {
+                  <div class="loading-state">
+                    <i class="bi bi-hourglass-split spinning"></i> Thinking of your fit...
+                  </div>
+                } @else if (searchResults[text] && searchResults[text]!.length > 0) {
+                  <div class="image-grid justify-content-around">
+                    @for (result of searchResults[text]; track result) {
+                      <div class="col-12 col-md-3">
+                        <img
+                          class="image-item"
+                          src="{{ result }}"
+                          alt="Style suggestion"
+                          class="image-preview"
+                        />
+                      </div>
+                    }
+                  </div>
+                } @else {
+                  <div class="text-secondary">No style suggestions available.</div>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    <form
+      class="row bg-dark p-1 my-2 g-1 bg-card border border-secondary"
+      (submit)="$event.preventDefault(); getResults(occasion.value); occasion.value = ''"
+    >
+      <div class="col-10">
+        <input
+          #occasion
+          type="text"
+          class="w-100"
+          placeholder="e.g. 80s party, brunch with friends, beach day"
+          style="background-color: transparent; color: white; border: none; padding: 10px"
+        />
+      </div>
+      <div class="col-2 d-flex justify-content-end">
+        <button
+          class="btn"
+          style="background-color: #22ff00; border-radius: 0%"
+          type="submit"
+          [disabled]="isLoading"
+        >
+          <i class="bi bi-send" style="font-weight: bold; color: black"></i>
+        </button>
+      </div>
+    </form>
+  </main>
+</body>
