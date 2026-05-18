@@ -1,11 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from '../../../Types/User';
-import { baseUrl } from '../../../baseUrl';
 import * as cryptoJS from 'crypto-js';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { supabaseKey } from '../../../supaBaseKey'
-import { SHA256 } from 'crypto-js';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +14,8 @@ export class AuthService {
 
   constructor() {
     this.client = createClient(
-      baseUrl,
-      supabaseKey
+      environment.supabaseUrl,
+      environment.supabaseKey
     );
   }
   
@@ -50,5 +47,4 @@ export class AuthService {
   }
 
 }
-
 
