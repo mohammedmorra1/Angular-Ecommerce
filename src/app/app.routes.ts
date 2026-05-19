@@ -1,9 +1,4 @@
 import { Routes } from '@angular/router';
-import { Login } from './Components/login/login';
-import { Signup } from './Components/signup/signup';
-import { ForgetPassword } from './Components/forget-password/forget-password';
-import { PinForm } from './Components/pin-form/pin-form';
-import { ResetPassword } from './Components/reset-password/reset-password';
 import { authGuard } from './Guard/auth/auth-guard';
 
 export const routes: Routes = [
@@ -29,19 +24,27 @@ export const routes: Routes = [
         loadComponent: () => import('./Components/signup/signup').then(m => m.Signup)
     },
     {
-        path:'signup',
-        component: Signup
+        path: 'forgetpassword',
+        loadComponent: () => import('./Components/forget-password/forget-password').then(m => m.ForgetPassword)
     },
     {
-        path:'forgetpassword',
-        component: ForgetPassword
+        path: 'pinform',
+        loadComponent: () => import('./Components/pin-form/pin-form').then(m => m.PinForm)
     },
     {
-        path:'pinform',
-        component: PinForm
+        path: 'resetpassword',
+        loadComponent: () => import('./Components/reset-password/reset-password').then(m => m.ResetPassword)
     },
     {
-        path:'resetpassword',
-        component:ResetPassword
+        path: 'checkout',
+        loadComponent: () => import('./core/features/products/components/checkout/checkout').then(m => m.Checkout)
+    },
+    {
+        path: 'payment-success',
+        loadComponent: () => import('./core/features/products/components/payment-success/payment-success').then(m => m.PaymentSuccess)
+    },
+    {
+        path: '**',
+        redirectTo: 'home'
     }
 ];

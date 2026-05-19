@@ -1,0 +1,73 @@
+<div class="page">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <span class="logo">VANTA/</span>
+    <div class="nav-links">
+      <a href="#">Shop</a>
+      <a href="#">Outerwear</a>
+      <a href="#">Footwear</a>
+      <a href="#">✦ AI Stylist</a>
+    </div>
+    <button class="cart-icon-btn" (click)="cartOpen = true">
+      🛍
+      @if (cartService.cartItems.length > 0) {
+        <span class="badge">{{ cartService.cartItems.length }}</span>
+      }
+    </button>
+  </nav>
+
+  <!-- Back -->
+  <div class="back-link">← BACK TO SHOP</div>
+
+  <!-- Product Section -->
+  <div class="product-container">
+    <!-- Image -->
+    <div class="product-image">
+      <img [src]="mockProduct.imageUrl" [alt]="mockProduct.title" />
+    </div>
+
+    <!-- Info -->
+    <div class="product-info">
+      <p class="category">{{ mockProduct.category | uppercase }}</p>
+      <h1 class="title">{{ mockProduct.title }}</h1>
+      <p class="price">${{ mockProduct.currentPrice }}.00</p>
+      <p class="description">{{ mockProduct.description }}</p>
+
+      <!-- Size -->
+      <div class="size-section">
+        <p class="size-label">SIZE</p>
+        <div class="sizes">
+          @for (size of mockProduct.availableSizes; track size) {
+            <button
+              class="size-btn"
+              [class.active]="selectedSize === size"
+              (click)="selectSize(size)"
+            >
+              {{ size }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- Add to Cart -->
+      <button class="add-btn" (click)="addToCart()" [disabled]="!selectedSize">Add to bag</button>
+
+      <!-- Perks -->
+      <div class="perks">
+        <span>FREE OVER $200</span>
+        <span>30 DAY RETURNS</span>
+        <span>AUTHENTIC</span>
+      </div>
+
+      <!-- Tags -->
+      <div class="tags">
+        @for (tag of mockProduct.tags; track tag) {
+          <span class="tag">{{ tag }}</span>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Sidebar -->
+  <app-cart [isOpen]="cartOpen" (closed)="cartOpen = false" />
+</div>
