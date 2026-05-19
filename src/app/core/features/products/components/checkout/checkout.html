@@ -37,7 +37,7 @@
         <div class="card">
           <p class="card-label">ITEMS</p>
 
-          @for (item of cartItems; track item.product.id) {
+          @for (item of cartItems; track item.product.id + '-' + item.selectedSize) {
             <div class="order-item">
               <img
                 [src]="item.product.imageUrl"

@@ -28,6 +28,10 @@
   .cart-overlay.open & {
     right: 0;
   }
+
+  @media (max-width: 480px) {
+    width: 100vw;
+  }
 }
 
 .cart-header {
@@ -199,14 +203,5 @@
     color: #555;
     margin: 0.75rem 0 0;
     letter-spacing: 0.05em;
-  }
-}
-
-
-.cart-panel {
-  width: 420px;
-
-  @media (max-width: 480px) {
-    width: 100vw;
   }
 }

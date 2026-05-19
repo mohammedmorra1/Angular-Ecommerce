@@ -52,6 +52,11 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'product/:id',
+    loadComponent: () =>
+      import('./core/features/products/components/product-detail/product-detail').then((m) => m.ProductDetail),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

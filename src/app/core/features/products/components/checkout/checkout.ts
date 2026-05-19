@@ -30,10 +30,10 @@ export class Checkout {
   ) {}
 
   async ngAfterViewInit() {
-    console.log('Cart items:', this.cartService.getCartItems());
-  console.log('Total in cents:', this.cartService.getTotalInCents());
+    console.log('Cart items:', this.cartService.cartItems());
+  console.log('Total in cents:', this.cartService.totalInCents());
 
-    const amount = this.cartService.getTotalInCents();
+    const amount = this.cartService.totalInCents();
     if (amount <= 0) {
       this.message = 'Your cart is empty';
       return;
@@ -131,11 +131,11 @@ export class Checkout {
   }
 
   get cartItems() {
-    return this.cartService.getCartItems();
+    return this.cartService.cartItems();
   }
 
   get subtotal() {
-    return this.cartService.getTotalPrice();
+    return this.cartService.totalPrice();
   }
 
   get total() {
