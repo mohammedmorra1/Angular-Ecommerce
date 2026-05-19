@@ -2,15 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Product } from '../../../../type';
 import { environment } from '../../../../../environments/environment';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService 
-{
+export class ProductService {
   private baseUrl = environment.apiBaseUrl;
-  private mapProduct(apiProduct: any): Product{
-    return{
+  private mapProduct(apiProduct: any): Product {
+    return {
       id: apiProduct._id,
       title: apiProduct.title,
       category: apiProduct.category,
@@ -19,47 +19,39 @@ export class ProductService
       description: apiProduct.description,
       imageUrl: apiProduct.image,
       availableSizes: apiProduct.size,
-      tags:[
-      '#streetwear',
-      '#oversized',
-      '#neon',
-      '#statement'
-    ],
+      tags: ['#streetwear', '#oversized', '#neon', '#statement'],
       stock: apiProduct.stock,
       brand: apiProduct.brand,
       rating: apiProduct.rating,
-      isNew: apiProduct.isNew
-    }
+      isNew: apiProduct.isNew,
+    };
   }
   http = inject(HttpClient);
   products = signal<Product[]>([]);
-  category = signal<string>("All");
+  category = signal<string>('All');
 
   getProducts() {
-    this.http.get<Product[]>(this.baseUrl).subscribe((response :any) => {
+    this.http.get<Product[]>(this.baseUrl).subscribe((response: any) => {
       const mappedProducts = response.data.map((apiProduct: any) => this.mapProduct(apiProduct));
       this.products.set(mappedProducts);
     });
   }
-
-  filteration = computed(()=>{
-    const products = this.products()
-    if(this.category() === "men")
-      {
-        return products.filter(p=>p.category == "men")
-      }
-      else if(this.category() === "women")
-      {
-        return products.filter(p=>p.category == "women")
-      }
-      else if(this.category() === "kids")
-      {
-        return products.filter(p=>p.category == "kids")
-      }
-      else{
-        return products;
-      }
-      
+  async getProductsAsync() {
+    const response = await firstValueFrom(this.http.get<any>(this.baseUrl));
+    const mappedProducts = response.data.map((apiProduct: any) => this.mapProduct(apiProduct));
+    this.products.set(mappedProducts);
   }
-  )
+
+  filteration = computed(() => {
+    const products = this.products();
+    if (this.category() === 'men') {
+      return products.filter((p) => p.category == 'men');
+    } else if (this.category() === 'women') {
+      return products.filter((p) => p.category == 'women');
+    } else if (this.category() === 'kids') {
+      return products.filter((p) => p.category == 'kids');
+    } else {
+      return products;
+    }
+  });
 }
