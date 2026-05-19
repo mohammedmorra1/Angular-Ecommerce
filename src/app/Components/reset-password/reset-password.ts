@@ -41,8 +41,8 @@ export class ResetPassword {
 
   router = inject(Router);
 
-  UpdatePassword(){
-      this.auth.UpdatePassword(localStorage.getItem('email')! , this.form.get("email")?.value!);
+  async UpdatePassword(){
+      this.auth.UpdatePassword(localStorage.getItem('email')! , this.form.get("password")?.value!);
       this.router.navigate(['/login']);
   }
 

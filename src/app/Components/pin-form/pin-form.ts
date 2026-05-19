@@ -20,8 +20,7 @@ export class PinForm {
   router = inject(Router);
 
   ValidatePin(){
-      console.log(this.pin);
-      console.log("auth pin" , this.auth.pin)
+
       if(this.pin == this.auth.pin){
           localStorage.setItem('pin' , this.pin);
           this.router.navigate(['/resetpassword']);
