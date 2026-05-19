@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../../Services/Auth/auth';
-import { User } from '../../../Types/User';
+import { Router } from '@angular/router';
 
 
 function match(group: AbstractControl): ValidationErrors | null{
@@ -13,22 +12,17 @@ function match(group: AbstractControl): ValidationErrors | null{
   return password !== confirmPassword ? {match : true}: null ;
 }
 
+
 @Component({
-  selector: 'app-signup',
+  selector: 'app-reset-password',
   imports: [CommonModule , ReactiveFormsModule],
-  templateUrl: './signup.html',
-  styleUrl: './signup.css',
+  templateUrl: './reset-password.html',
+  styleUrl: './reset-password.css',
 })
-export class Signup {
+export class ResetPassword {
 
-  router = inject(Router);
-
-  authService = inject(AuthService);
-
-  form = new FormGroup({
-    email : new FormControl('' , [Validators.required , Validators.email]),
-    username : new FormControl('' , [Validators.required]),
-
+    form = new FormGroup({
+    
     password : new FormControl('' , [Validators.required , 
       Validators.minLength(8) , 
       Validators.pattern(new RegExp('[^a-zA-Z0-9]' ) ),
@@ -43,28 +37,13 @@ export class Signup {
     validators : match
   });
 
-  duplicateMail = false;
+  auth = inject(AuthService);
 
+  router = inject(Router);
 
-  async Signup(){
-
-
-    let res = await this.authService.
-    AddUser(new User(this.form.get("username")?.value! , this.form.get("email")?.value!  , this.form.get("password")?.value! ));
-    
-    if(res == 0){
-      this.duplicateMail = true;
-      return;
-    }
-    else this.duplicateMail = false;
-
-    this.router.navigate(['/login']);
-  }
-
-  Login(){
-
-    
-
+  UpdatePassword(){
+      this.auth.UpdatePassword(localStorage.getItem('email')! , this.form.get("email")?.value!);
+      this.router.navigate(['/login']);
   }
 
 }

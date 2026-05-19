@@ -20,7 +20,7 @@
                 <label class="form-label text-light" for="username">Username</label>
                 <input formControlName="username" class="form-control" name="username">
 
-                @if(form.get('username')?.errors?.['required']){
+                @if(form.get('username')?.errors?.['required'] && form.get('username')?.touched){
                     <p class="text-danger">Please enter username</p>
 
                 }
@@ -66,9 +66,12 @@
                 @if(form?.errors?.['match']){
                     <p class="text-danger">Passwords must match</p>
                 }
+                
+                @if(duplicateMail){
+                    <p class="text-danger">An account already exists for this email</p>
+                }
 
-
-                <button [disabled]="form?.invalid" class="btn btn-primary mt-2">Sign up</button>
+                <button [disabled]="form?.invalid" class="btn btn-primary mt-2" type="submit">Sign up</button>
             </form>
         </div>
 
