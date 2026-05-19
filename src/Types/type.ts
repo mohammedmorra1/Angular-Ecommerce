@@ -13,3 +13,9 @@ export interface Product {
   rating: number;
   isNew: boolean;
 }
+
+export interface CartItem {
+  product: Product;
+  quantity: number;
+  selectedSize: string;
+}

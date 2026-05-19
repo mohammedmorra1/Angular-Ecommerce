@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import { ProductService } from '../../services/productService';
-import { Product } from '../../../../../type';
+import { Product } from '../../../../../../Types/type';
 
 @Component({
   selector: 'app-card',
@@ -19,7 +19,7 @@ export class Card {
   oldPrice: 0,
   description: "",
   imageUrl: "",
-  availableSizes: [], 
+  availableSizes: [],
   tags: [],
   stock: 0,
   brand: "",

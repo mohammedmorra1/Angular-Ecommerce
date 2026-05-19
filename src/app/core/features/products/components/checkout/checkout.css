@@ -1,0 +1,294 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  background: #0a0a0a;
+  color: #fff;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+/* ─── NAVBAR ─── */
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #1e1e1e;
+  gap: 2rem;
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+.nav-links a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: #fff;
+}
+
+/* ─── WRAPPER ─── */
+.checkout-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+.page-title {
+  font-size: 2.75rem;
+  font-weight: 700;
+  margin: 0 0 2rem;
+  color: #fff;
+}
+
+/* ─── GRID ─── */
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ─── CARD ─── */
+.card {
+  border: 1px solid #1e1e1e;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background: #0f0f0f;
+}
+
+.card-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: #555;
+  margin: 0 0 1rem;
+}
+
+.email-display {
+  font-size: 1rem;
+  color: #ddd;
+  margin: 0 0 0.5rem;
+}
+
+.demo-note {
+  font-size: 0.82rem;
+  color: #555;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.divider {
+  border-top: 1px solid #1e1e1e;
+  margin: 1.25rem 0;
+}
+
+/* ─── STRIPE ELEMENT ─── */
+#payment-element {
+  margin-top: 0.5rem;
+}
+
+.error-msg {
+  color: #ff4d4d;
+  font-size: 0.82rem;
+  margin: 0.75rem 0 0;
+}
+
+/* ─── ORDER ITEMS ─── */
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #181818;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.item-img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #1a1a1a;
+  flex-shrink: 0;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0 0 4px;
+  color: #fff;
+}
+
+.item-meta {
+  font-size: 0.78rem;
+  color: #888;
+  margin: 0;
+}
+
+.item-price {
+  font-size: 0.95rem;
+  color: #ccc;
+  white-space: nowrap;
+}
+
+.empty-msg {
+  color: #555;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 1rem 0 0;
+}
+
+/* ─── SUMMARY ─── */
+.summary-card {
+  position: sticky;
+  top: 1rem;
+  margin-bottom: 0;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.summary-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: #888;
+}
+
+.summary-value {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.summary-divider {
+  border: none;
+  border-top: 1px solid #1e1e1e;
+  margin: 1rem 0;
+}
+
+.total-label {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.total-amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ─── BUTTON ─── */
+.place-order-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #4ade80;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1.25rem;
+  transition: background 0.2s;
+  letter-spacing: 0.02em;
+}
+
+.place-order-btn:hover {
+  background: #22c55e;
+}
+
+.place-order-btn:disabled {
+  background: #1a1a1a;
+  color: #444;
+  cursor: not-allowed;
+}
+
+.secure-note {
+  text-align: center;
+  font-size: 0.68rem;
+  color: #333;
+  letter-spacing: 0.12em;
+  margin: 0.75rem 0 0;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-card {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .checkout-wrapper {
+    padding: 1.5rem 1rem;
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+  }
+
+  .total-amount {
+    font-size: 1.5rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .item-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .place-order-btn {
+    padding: 0.85rem;
+    font-size: 0.9rem;
+  }
+}

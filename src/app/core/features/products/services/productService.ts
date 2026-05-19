@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { Product } from '../../../../type';
+import { Product } from '../../../../../Types/type';
 import { environment } from '../../../../../environments/environment';
 import { firstValueFrom } from 'rxjs';
 

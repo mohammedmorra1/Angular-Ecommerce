@@ -1,6 +1,6 @@
 import { Component, ElementRef, inject, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { StylistSearchService } from '../../../services/stylist-search-service';
-import { Product } from '../../../../../../type';
+import { Product } from '../../../../../../../Types/type';
 
 @Component({
   selector: 'app-stylist-search',
