@@ -1,11 +1,11 @@
 import { Component, inject, Input } from '@angular/core';
 import { AuthService } from '../../Services/Auth/auth';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule , RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
@@ -19,6 +19,8 @@ export class Login {
 
   @Input() password = "";
 
+  invalidCredentials = false;
+
   async Login(){
 
       console.log("username" + this.username);
@@ -31,7 +33,7 @@ export class Login {
         this.router.navigate(['/home']);
       }
       else{
-        console.log("invalid user");
+        this.invalidCredentials = true;
       }
   }
 

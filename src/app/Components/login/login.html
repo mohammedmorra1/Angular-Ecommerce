@@ -12,6 +12,13 @@
                 <label class="form-label text-light" for="password">Password</label>
                 <input class="form-control" name="password" [(ngModel)]="password" type="password">
                 
+                @if(invalidCredentials){
+                    <p class="error-msg">Invalid credentials</p>
+                }
+                
+                <div>
+                <a routerLink = "/forgetpassword" class="text-light">Forget password</a>
+                </div>
                 <button type="submit" class="btn btn-primary mt-2">Log in</button>
             </form>
 
