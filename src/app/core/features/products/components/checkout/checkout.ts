@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { CartService } from '../../services/cart-service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-checkout',
@@ -23,6 +24,7 @@ export class Checkout {
   loading = false;
   message = '';
   shippingCost = 12;
+  stripeLoading = true;
 
   constructor(
     private cartService: CartService,
@@ -30,21 +32,18 @@ export class Checkout {
   ) {}
 
   async ngAfterViewInit() {
-    console.log('Cart items:', this.cartService.cartItems());
-  console.log('Total in cents:', this.cartService.totalInCents());
-
     const amount = this.cartService.totalInCents();
     if (amount <= 0) {
       this.message = 'Your cart is empty';
+      this.stripeLoading = false;
       return;
     }
-    this.stripe = await loadStripe(
-      'STRIPE_PUBLIC_KEY',
-    );
+    this.stripeLoading = true;
+    this.stripe = await loadStripe(environment.stripePublicKey);
     this.http
       .post<{
         clientSecret: string;
-      }>('http://localhost:5199/api/payments/create-payment-intent', { amount: amount })
+      }>(`${environment.paymentApiUrl}/create-payment-intent`, { amount: amount })
       .subscribe({
         next: ({ clientSecret }) => {
           if (!this.stripe) return;
@@ -101,9 +100,11 @@ export class Checkout {
             layout: 'tabs',
           });
           paymentElement.mount('#payment-element');
+          this.stripeLoading = false;
         },
         error: () => {
           this.message = 'Could not load payment form';
+          this.stripeLoading = false;
         },
       });
   }
@@ -120,7 +121,7 @@ export class Checkout {
     const result = await this.stripe.confirmPayment({
       elements: this.elements,
       confirmParams: {
-        return_url: 'http://localhost:4200/payment-success',
+        return_url: `${window.location.origin}/payment-success`,
       },
     });
 

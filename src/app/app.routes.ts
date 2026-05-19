@@ -43,6 +43,7 @@ export const routes: Routes = [
     path: 'checkout',
     loadComponent: () =>
       import('./core/features/products/components/checkout/checkout').then((m) => m.Checkout),
+    canActivate: [authGuard],
   },
   {
     path: 'payment-success',
@@ -50,6 +51,7 @@ export const routes: Routes = [
       import('./core/features/products/components/payment-success/payment-success').then(
         (m) => m.PaymentSuccess,
       ),
+    canActivate: [authGuard],
   },
   {
     path: 'product/:id',

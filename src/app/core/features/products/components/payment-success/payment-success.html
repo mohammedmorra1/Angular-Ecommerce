@@ -19,6 +19,9 @@
 
       <h1 class="title">Order placed.</h1>
       <p class="subtitle">You'll get a confirmation by email. Now go look mean.</p>
+      @if (orderId) {
+        <p class="order-id">Order #{{ orderId.slice(0, 8).toUpperCase() }}</p>
+      }
 
       <button class="keep-shopping-btn" (click)="keepShopping()">
         KEEP SHOPPING
