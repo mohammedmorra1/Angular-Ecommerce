@@ -1,11 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from '../../../Types/User';
-import { baseUrl } from '../../../baseUrl';
-import * as cryptoJS from 'crypto-js';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { supabaseKey } from '../../../supaBaseKey'
-import { SHA256 } from 'crypto-js';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -18,15 +14,21 @@ export class AuthService {
 
   constructor() {
     this.client = createClient(
-      baseUrl,
-      supabaseKey
+      environment.supabaseUrl,
+      environment.supabaseKey
     );
   }
-  
+
+  private async hashPassword(password: string): Promise<string> {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  }
 
   async AddUser(user : User){
-
-      user.password = cryptoJS.SHA256(user.password).toString();
+      user.password = await this.hashPassword(user.password);
 
 
       const check = await this.GetUserByEmail(user.email);
@@ -45,12 +47,11 @@ export class AuthService {
   }
 
   async CheckUser(username : string , password : string){
-
-    password = cryptoJS.SHA256(password).toString();
+    const hashedPassword = await this.hashPassword(password);
 
     const {data , error} = await this.client.from('Users').select('*')
     .eq('username' , username)
-    .eq('password' , password).single();
+    .eq('password' , hashedPassword).single();
 
     return data;
   }
@@ -73,5 +74,3 @@ export class AuthService {
   }
 
 }
-
-

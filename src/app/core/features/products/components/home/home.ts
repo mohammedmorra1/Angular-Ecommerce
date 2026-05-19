@@ -1,10 +1,11 @@
 import { Component, computed, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ProductService } from '../../services/productService';
 import { Card } from "../card/card";
 
 @Component({
   selector: 'app-home',
-  imports: [Card],
+  imports: [Card, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -18,7 +19,7 @@ export class Home {
   })
 
   ngOnInit() {
-    this.productService.getProducts();
+    this.productService.getHomeProducts();
   }
   
 }
