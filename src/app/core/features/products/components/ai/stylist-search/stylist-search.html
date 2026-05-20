@@ -1,5 +1,5 @@
-<body style="background-color: black">
-  <main class="container text-white bg-black w-50 m-auto">
+<div class="py-5" style="background-color: black">
+  <div class="container text-white bg-black w-75 m-auto">
     <p style="color: #22ff00"><i class="bi bi-stars"></i> AI Stylist</p>
     <p class="fs-1 fw-bold my-0 py-0">What's the occasion?</p>
     <p style="color: gray">Describe the vibe — your fit will appear.</p>
@@ -22,12 +22,13 @@
                   <div class="image-grid justify-content-around">
                     @for (result of searchResults[text]; track result) {
                       <div class="col-12 col-md-3">
-                        <img
+                        <!-- <img
                           class="image-item"
                           src="{{ result }}"
                           alt="Style suggestion"
                           class="image-preview"
-                        />
+                        /> -->
+                        <app-card [cardProduct]="result"></app-card>
                       </div>
                     }
                   </div>
@@ -65,5 +66,5 @@
         </button>
       </div>
     </form>
-  </main>
-</body>
+  </div>
+</div>

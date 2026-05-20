@@ -9,10 +9,10 @@ export class CartService {
 
   //<button (click)="addToCart(product)">Add To Cart </button>
   addToCart(product: Product, size: string, quantity: number = 1) {
- const existingItem = this.cartItems.find(
-    (item) => item.product.id === product.id && item.selectedSize === size
-  );
-     if (existingItem) {
+    const existingItem = this.cartItems.find(
+      (item) => item.product.id === product.id && item.selectedSize === size,
+    );
+    if (existingItem) {
       existingItem.quantity += quantity;
     } else {
       this.cartItems.push({ product, quantity, selectedSize: size });

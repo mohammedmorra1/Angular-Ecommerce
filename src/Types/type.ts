@@ -19,3 +19,22 @@ export interface CartItem {
   quantity: number;
   selectedSize: string;
 }
+
+export interface OrderItem {
+  productId: number;
+  title: string;
+  quantity: number;
+  selectedSize: string;
+  unitPrice: number;
+}
+
+export interface Order {
+  id: string;
+  paymentIntentId: string;
+  items: OrderItem[];
+  subtotal: number;
+  shipping: number;
+  total: number;
+  status: string;
+  createdAt: string;
+}

@@ -22,11 +22,16 @@
         <div class="card">
           <p class="card-label">SHIPPING</p>
           <p class="email-display">{{ cartItems[0]?.product?.brand ?? 'Guest' }}</p>
-          <p class="demo-note">Demo flow — payment is simulated. Stripe integration plugs in here next.</p>
 
           <div class="divider"></div>
 
-          <div id="payment-element"></div>
+          @if (stripeLoading) {
+            <div class="stripe-loading">
+              <div class="spinner"></div>
+              <p>Loading payment form...</p>
+            </div>
+          }
+          <div id="payment-element" [class.hidden]="stripeLoading"></div>
 
           @if (message) {
             <p class="error-msg">{{ message }}</p>
@@ -37,7 +42,7 @@
         <div class="card">
           <p class="card-label">ITEMS</p>
 
-          @for (item of cartItems; track item.product.id) {
+          @for (item of cartItems; track item.product.id + '-' + item.selectedSize) {
             <div class="order-item">
               <img
                 [src]="item.product.imageUrl"

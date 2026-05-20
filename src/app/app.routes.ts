@@ -1,12 +1,10 @@
 import { Routes } from '@angular/router';
 import { Login } from './Components/login/login';
 import { Signup } from './Components/signup/signup';
-import { authGuard } from './Guard/auth-guard';
 import { Home } from './core/features/products/components/home/home';
 import { Shop } from './core/features/products/components/shop/shop';
 import { Checkout } from './core/features/products/components/checkout/checkout';
 import {PaymentSuccess} from './core/features/products/components/payment-success/payment-success';
-import { ProductDetailTest } from './core/features/products/components/product-detail-test/product-detail-test';
 export const routes: Routes = [
   {
     path: '',
@@ -15,21 +13,22 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    component: Home,
+    loadComponent: () =>
+      import('./core/features/products/components/home/home').then((m) => m.Home),
   },
   {
     path: 'shop',
-    component: Shop,
+    loadComponent: () =>
+      import('./core/features/products/components/shop/shop').then((m) => m.Shop),
   },
   {
     path: 'login',
-    component: Login,
+    loadComponent: () => import('./Components/login/login').then((m) => m.Login),
   },
   {
     path: 'signup',
-    component: Signup,
+    loadComponent: () => import('./Components/signup/signup').then((m) => m.Signup),
   },
-  {path: 'product-detail-test',component: ProductDetailTest},
   { path: 'checkout', component: Checkout },
   { path: 'payment-success', component: PaymentSuccess },
   {

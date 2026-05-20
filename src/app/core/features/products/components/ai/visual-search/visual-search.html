@@ -1,0 +1,47 @@
+<body class="py-5" style="background-color: black">
+  <main class="container text-white bg-black m-auto">
+    <p style="color: #22ff00"><i class="bi bi-camera"></i> Visual Search</p>
+    <p class="fs-1 fw-bold my-0 py-0">Drop an image.</p>
+    <p style="color: gray">We'll surface the closest pieces in our drop.</p>
+    @if (sent) {
+      @if (uploadedImage == null) {
+        <div class="loading-state mt-4">
+          <i class="bi bi-hourglass-split spinning"></i> Uploading...
+        </div>
+      } @else {
+        <div class="row">
+          <div class="col-12 col-md-4 mb-4">
+            <img [src]="uploadedImage" alt="Uploaded Image" class="image-preview w-100" />
+            <button
+              class="search-again-btn"
+              [style.display]="results.length == 0 ? 'none' : 'block'"
+              (click)="reloadRoute()"
+            >
+              Try Another
+            </button>
+          </div>
+          @if (results.length > 0) {
+            <div class="col-12 row">
+              @for (i of results; track i.id) {
+                <div class="col-6 col-md-4 col-lg-3">
+                  <!-- <img [src]="i.imageUrl" alt="{{ i.title }}" class="w-100" /> -->
+                  <app-card [cardProduct]="i"></app-card>
+                </div>
+              }
+            </div>
+          } @else {
+            <div class="loading-state mt-4">
+              <i class="bi bi-hourglass-split spinning"></i> Thinking...
+            </div>
+          }
+        </div>
+      }
+    } @else {
+      <div class="upload-box" onclick="document.getElementById('formFile').click()">
+        <i class="bi bi-cloud-upload fs-1 mb-3"></i>
+        <p>Click or drag an image here to search</p>
+        <input type="file" id="formFile" (change)="sendImage($event); this.sent = true" />
+      </div>
+    }
+  </main>
+</body>

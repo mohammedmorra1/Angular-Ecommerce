@@ -1,0 +1,15 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <p class="auth-eyebrow">VANTA/</p>
+    <h1 class="auth-title">ENTER PIN</h1>
+
+    <form (submit)="ValidatePin()">
+      <div class="form-group">
+        <label class="auth-label" for="pin">PIN CODE</label>
+        <input [(ngModel)]="pin" name="pin" class="auth-input" placeholder="Enter PIN">
+      </div>
+
+      <button type="submit" class="auth-btn">SUBMIT</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <a class="logo" routerLink="/home">VANTA<span class="logo-slash">/</span></a>
+
+      <nav class="desktop-nav">
+        <a class="nav-link" routerLink="/shop">SHOP</a>
+        <a class="nav-link" routerLink="/stylist">AI STYLIST</a>
+      </nav>
+    </div>
+
+    <div class="header-right">
+      <button class="cart-btn" (click)="cartService.cartOpen.update(v => !v)">
+        <i class="bi bi-bag"></i>
+        @if (cartService.cartItems().length > 0) {
+          <span class="cart-badge">{{ cartService.cartItems().length }}</span>
+        }
+      </button>
+
+      @if (isLoggedIn()) {
+        <span class="user-name">{{ username }}</span>
+      } @else {
+        <a class="nav-link desktop-only" routerLink="/login">SIGN IN</a>
+      }
+
+      <button class="burger-btn" (click)="toggleMenu()">
+        <i class="bi" [class.bi-list]="!menuOpen()" [class.bi-x-lg]="menuOpen()"></i>
+      </button>
+    </div>
+  </div>
+
+  @if (menuOpen()) {
+    <nav class="mobile-nav">
+      <a class="mobile-link" routerLink="/shop" (click)="closeMenu()">SHOP</a>
+      <a class="mobile-link" routerLink="/stylist" (click)="closeMenu()">AI STYLIST</a>
+      @if (!isLoggedIn()) {
+        <a class="mobile-link" routerLink="/login" (click)="closeMenu()">SIGN IN</a>
+      }
+    </nav>
+  }
+</header>

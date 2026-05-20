@@ -1,4 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductService } from '../../services/productService';
 import { Product } from '../../../../../../Types/type';
 
@@ -19,7 +20,7 @@ export class Card {
   oldPrice: 0,
   description: "",
   imageUrl: "",
-  availableSizes: [],
+  availableSizes: [], 
   tags: [],
   stock: 0,
   brand: "",
@@ -27,4 +28,9 @@ export class Card {
   isNew: false
 }
   productService = inject(ProductService)
+  private router = inject(Router)
+
+  goToDetail() {
+    this.router.navigate(['/product', this.cardProduct.id]);
+  }
 }

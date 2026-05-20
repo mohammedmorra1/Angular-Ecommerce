@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/Auth/auth';
 import { User } from '../../../Types/User';
 
@@ -15,7 +15,7 @@ function match(group: AbstractControl): ValidationErrors | null{
 
 @Component({
   selector: 'app-signup',
-  imports: [CommonModule , ReactiveFormsModule],
+  imports: [CommonModule , ReactiveFormsModule, RouterLink],
   templateUrl: './signup.html',
   styleUrl: './signup.css',
 })
@@ -43,14 +43,21 @@ export class Signup {
     validators : match
   });
 
+  duplicateMail = false;
 
 
   async Signup(){
 
 
-    await this.authService.
+    let res = await this.authService.
     AddUser(new User(this.form.get("username")?.value! , this.form.get("email")?.value!  , this.form.get("password")?.value! ));
     
+    if(res == 0){
+      this.duplicateMail = true;
+      return;
+    }
+    else this.duplicateMail = false;
+
     this.router.navigate(['/login']);
   }
 
