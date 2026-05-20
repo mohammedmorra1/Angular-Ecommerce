@@ -4,6 +4,7 @@ import { Product } from '../../../../../../../Types/type';
 import { compressImage } from '../../../utils';
 import { Card } from '../../card/card';
 import { Router } from '@angular/router';
+import { ProductService } from '../../../services/productService';
 @Component({
   selector: 'app-visual-search',
   imports: [Card],
@@ -11,6 +12,11 @@ import { Router } from '@angular/router';
   styleUrl: './visual-search.css',
 })
 export class VisualSearch {
+  productService = inject(ProductService);
+
+  ngOnInit() {
+    this.productService.getProducts();
+  }
   constructor(private router: Router) {}
   cdr = inject(ChangeDetectorRef);
   styleSearchService = inject(StylistSearchService);

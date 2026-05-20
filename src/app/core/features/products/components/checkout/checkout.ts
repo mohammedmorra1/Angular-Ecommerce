@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { CartService } from '../../services/cart-service';
@@ -12,14 +12,13 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })
-export class Checkout implements OnInit, AfterViewInit {
+export class Checkout implements AfterViewInit {
   stripe: Stripe | null = null;
   elements: StripeElements | null = null;
   loading = false;
+  stripeLoading = true;
   message = '';
   shippingCost = 12;
-  private clientSecret = '';
-  stripeLoading = true;  
 
   constructor(
     private cartService: CartService,
@@ -27,96 +26,93 @@ export class Checkout implements OnInit, AfterViewInit {
     private cdr: ChangeDetectorRef,
   ) {}
 
-  // fetch / subscribe to client secret from your API
-  ngOnInit() {
+  async ngAfterViewInit() {
     const amount = this.cartService.getTotalInCents();
 
     if (amount <= 0) {
       this.message = 'Your cart is empty';
+      this.stripeLoading = false;
+      this.cdr.detectChanges();
       return;
     }
 
-    this.http
-      .post<{
-        clientSecret: string;
-      }>('http://localhost:5199/api/payments/create-payment-intent', { amount })
-      .subscribe({
-        next: ({ clientSecret }) => {
-          this.clientSecret = clientSecret;
-          this.cdr.detectChanges();
-          this.mountStripe();
-        },
-        error: () => {
-          this.message = 'Could not load payment form';
+    try {
+      // load stripe + call API at the same time
+      const [stripeInstance, response] = await Promise.all([
+        loadStripe('STRIPE_PUBLIC_KEY'),
+        this.http.post<{ clientSecret: string }>(
+          'http://localhost:5199/api/payments/create-payment-intent',
+          { amount }
+        ).toPromise()
+      ]);
+
+      if (!stripeInstance || !response) {
+        this.message = 'Could not load payment form';
+        this.stripeLoading = false;
+        this.cdr.detectChanges();
+        return;
+      }
+
+      this.stripe = stripeInstance;
+
+      this.elements = this.stripe.elements({
+        clientSecret: response.clientSecret,
+        appearance: {
+          theme: 'night',
+          variables: {
+            colorPrimary: '#4ade80',
+            colorBackground: '#0f0f0f',
+            colorText: '#ffffff',
+            colorDanger: '#ff4d4d',
+            colorTextPlaceholder: '#555555',
+            borderRadius: '6px',
+            fontFamily: 'sans-serif',
+          },
+          rules: {
+            '.Input': {
+              backgroundColor: '#111111',
+              border: '1px solid #2a2a2a',
+              color: '#ffffff',
+            },
+            '.Input:focus': {
+              border: '1px solid #4ade80',
+              boxShadow: 'none',
+            },
+            '.Tab': {
+              backgroundColor: '#111111',
+              border: '1px solid #2a2a2a',
+              color: '#888888',
+            },
+            '.Tab--selected': {
+              backgroundColor: '#111111',
+              border: '1px solid #4ade80',
+              color: '#ffffff',
+            },
+            '.Tab:hover': { color: '#ffffff' },
+            '.Label': {
+              color: '#888888',
+              fontSize: '12px',
+              letterSpacing: '0.05em',
+            },
+            '.Error': { color: '#ff4d4d' },
+          },
         },
       });
-  }
 
-  //load Stripe and mount element
-  async ngAfterViewInit() {
-    this.stripe = await loadStripe(
-      'STRIPE_PUBLIC_KEY',
-    );
-    if (this.clientSecret) {
-      this.mountStripe();
-    }
-  }
-
-  private mountStripe() {
-    if (!this.stripe || !this.clientSecret) return;
-
-    this.elements = this.stripe.elements({
-      clientSecret: this.clientSecret,
-      appearance: {
-        theme: 'night',
-        variables: {
-          colorPrimary: '#4ade80',
-          colorBackground: '#0f0f0f',
-          colorText: '#ffffff',
-          colorDanger: '#ff4d4d',
-          colorTextPlaceholder: '#555555',
-          borderRadius: '6px',
-          fontFamily: 'sans-serif',
-        },
-        rules: {
-          '.Input': {
-            backgroundColor: '#111111',
-            border: '1px solid #2a2a2a',
-            color: '#ffffff',
-          },
-          '.Input:focus': {
-            border: '1px solid #4ade80',
-            boxShadow: 'none',
-          },
-          '.Tab': {
-            backgroundColor: '#111111',
-            border: '1px solid #2a2a2a',
-            color: '#888888',
-          },
-          '.Tab--selected': {
-            backgroundColor: '#111111',
-            border: '1px solid #4ade80',
-            color: '#ffffff',
-          },
-          '.Tab:hover': { color: '#ffffff' },
-          '.Label': {
-            color: '#888888',
-            fontSize: '12px',
-            letterSpacing: '0.05em',
-          },
-          '.Error': { color: '#ff4d4d' },
-        },
-      },
-    });
-
-    setTimeout(() => {
-      const paymentElement = this.elements!.create('payment', {
+      const paymentElement = this.elements.create('payment', {
         layout: 'tabs',
         paymentMethodOrder: ['card'],
       });
+
       paymentElement.mount('#payment-element');
+      this.stripeLoading = false;
       this.cdr.detectChanges();
-    });
+
+    } catch {
+      this.message = 'Could not load payment form';
+      this.stripeLoading = false;
+      this.cdr.detectChanges();
+    }
   }
 
   async pay() {
