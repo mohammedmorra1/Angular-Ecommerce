@@ -1,38 +1,54 @@
-.product-card{
-    cursor: pointer;
+.product-card {
+  cursor: pointer;
 }
 
-.product-img{
-    height: 420px;
-    object-fit: cover;
-    transition: transform 0.7s ease;
+.product-img {
+  height: 420px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
 }
 
-.product-card:hover .product-img{
-    transform: scale(1.05);
+.product-card:hover .product-img {
+  transform: scale(1.05);
 }
 
-.quick-view{
-    position: absolute;
-    bottom: -50px;
-    left: 0;
-    width: 100%;
-    padding: 12px;
-    background: #22ff00;
-    color: black;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: 0.3s ease;
+.quick-view {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  padding: 12px;
+  background: var(--neon);
+  color: var(--neon-foreground);
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: 0.3s ease;
 }
 
-.product-card:hover .quick-view{
-    bottom: 0;
+.product-card:hover .quick-view {
+  bottom: 0;
 }
 
-.category-text{
-    letter-spacing: 2px;
-    color: white;
+.card-title {
+  color: var(--foreground);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.card-price {
+  color: var(--foreground);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.category-text {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  color: var(--muted-foreground);
 }

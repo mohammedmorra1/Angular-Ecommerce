@@ -1,6 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductService } from '../../services/productService';
-import { Product } from '../../../../../type';
+import { Product } from '../../../../../../Types/type';
 
 @Component({
   selector: 'app-card',
@@ -27,4 +28,9 @@ export class Card {
   isNew: false
 }
   productService = inject(ProductService)
+  private router = inject(Router)
+
+  goToDetail() {
+    this.router.navigate(['/product', this.cardProduct.id]);
+  }
 }

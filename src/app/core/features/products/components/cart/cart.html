@@ -1,0 +1,57 @@
+<div class="cart-overlay" [class.open]="isOpen" (click)="closeOnOverlay($event)">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h2>Your Bag &bull; {{ cartService.cartItems().length }}</h2>
+      <button class="close-btn" (click)="close()">
+        <span>&times;</span>
+      </button>
+    </div>
+
+    <div class="cart-items">
+      @if (cartService.cartItems().length === 0) {
+        <div class="empty-cart">
+          <p>Your bag is empty.</p>
+        </div>
+      } @else {
+        @for (item of cartService.cartItems(); track item.product.id + '-' + item.selectedSize) {
+          <div class="cart-item">
+            <img [src]="item.product.imageUrl" [alt]="item.product.title" loading="lazy" class="item-img" />
+
+            <div class="item-details">
+              <div class="item-top">
+                <div>
+                  <p class="item-name">{{ item.product.title }}</p>
+                  <p class="item-size">SIZE {{ item.selectedSize }}</p>
+                </div>
+                <button class="remove-btn" (click)="cartService.removeFromCart(item.product.id, item.selectedSize)">
+                  &times;
+                </button>
+              </div>
+
+              <div class="item-bottom">
+                <div class="qty-control">
+                  <button (click)="decrementQuantity(item)">−</button>
+                  <span>{{ item.quantity }}</span>
+                  <button (click)="incrementQuantity(item)">+</button>
+                </div>
+                <span class="item-price">
+                  ${{ (item.product.currentPrice * item.quantity).toFixed(2) }}
+                </span>
+              </div>
+            </div>
+          </div>
+        }
+      }
+    </div>
+
+    <div class="cart-footer">
+      <div class="subtotal">
+        <span>SUBTOTAL</span>
+        <span class="subtotal-price">${{ cartService.totalPrice().toFixed(2) }}</span>
+      </div>
+      <button class="checkout-btn" (click)="goToCheckout()"
+  [disabled]="cartService.cartItems().length === 0">Checkout</button>
+      <p class="shipping-note">FREE SHIPPING OVER $200</p>
+    </div>
+  </div>
+</div>
