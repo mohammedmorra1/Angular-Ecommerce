@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { CartService } from '../../services/cart-service';
@@ -7,105 +7,115 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-checkout',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })
-export class Checkout {
+export class Checkout implements OnInit, AfterViewInit {
   stripe: Stripe | null = null;
-  // cardElement: any;
-  // email = '';
-  // loading = false;
-  // errorMessage = '';
-  // shippingCost = 12;
-
   elements: StripeElements | null = null;
   loading = false;
   message = '';
   shippingCost = 12;
+  private clientSecret = '';
 
   constructor(
     private cartService: CartService,
     private http: HttpClient,
+    private cdr: ChangeDetectorRef,
   ) {}
 
-  async ngAfterViewInit() {
-    console.log('Cart items:', this.cartService.getCartItems());
-  console.log('Total in cents:', this.cartService.getTotalInCents());
-
+  // fetch / subscribe to client secret from your API
+  ngOnInit() {
     const amount = this.cartService.getTotalInCents();
+
     if (amount <= 0) {
       this.message = 'Your cart is empty';
       return;
     }
-    this.stripe = await loadStripe(
-      'STRIPE_PUBLIC_KEY',
-    );
+
     this.http
       .post<{
         clientSecret: string;
-      }>('http://localhost:5199/api/payments/create-payment-intent', { amount: amount })
+      }>('http://localhost:5199/api/payments/create-payment-intent', { amount })
       .subscribe({
         next: ({ clientSecret }) => {
-          if (!this.stripe) return;
-
-          // this.elements = this.stripe.elements({ clientSecret : clientSecret });
-          this.elements = this.stripe.elements({
-           clientSecret : clientSecret,
-            appearance: {
-              theme: 'night',
-              variables: {
-                colorPrimary: '#4ade80',
-                colorBackground: '#0f0f0f',
-                colorText: '#ffffff',
-                colorDanger: '#ff4d4d',
-                colorTextPlaceholder: '#555555',
-                borderRadius: '6px',
-                fontFamily: 'sans-serif',
-              },
-              rules: {
-                '.Input': {
-                  backgroundColor: '#111111',
-                  border: '1px solid #2a2a2a',
-                  color: '#ffffff',
-                },
-                '.Input:focus': {
-                  border: '1px solid #4ade80',
-                  boxShadow: 'none',
-                },
-                '.Tab': {
-                  backgroundColor: '#111111',
-                  border: '1px solid #2a2a2a',
-                  color: '#888888',
-                },
-                '.Tab--selected': {
-                  backgroundColor: '#111111',
-                  border: '1px solid #4ade80',
-                  color: '#ffffff',
-                },
-                '.Tab:hover': {
-                  color: '#ffffff',
-                },
-                '.Label': {
-                  color: '#888888',
-                  fontSize: '12px',
-                  letterSpacing: '0.05em',
-                },
-                '.Error': {
-                  color: '#ff4d4d',
-                },
-              },
-            },
-          });
-          const paymentElement = this.elements.create('payment', {
-            layout: 'tabs',
-          });
-          paymentElement.mount('#payment-element');
+          this.clientSecret = clientSecret;
+          this.cdr.detectChanges();
+          this.mountStripe();
         },
         error: () => {
           this.message = 'Could not load payment form';
         },
       });
+  }
+
+  //load Stripe and mount element
+  async ngAfterViewInit() {
+    this.stripe = await loadStripe(
+      'STRIPE_PUBLIC_KEY',
+    );
+    if (this.clientSecret) {
+      this.mountStripe();
+    }
+  }
+
+  private mountStripe() {
+    if (!this.stripe || !this.clientSecret) return;
+
+    this.elements = this.stripe.elements({
+      clientSecret: this.clientSecret,
+      appearance: {
+        theme: 'night',
+        variables: {
+          colorPrimary: '#4ade80',
+          colorBackground: '#0f0f0f',
+          colorText: '#ffffff',
+          colorDanger: '#ff4d4d',
+          colorTextPlaceholder: '#555555',
+          borderRadius: '6px',
+          fontFamily: 'sans-serif',
+        },
+        rules: {
+          '.Input': {
+            backgroundColor: '#111111',
+            border: '1px solid #2a2a2a',
+            color: '#ffffff',
+          },
+          '.Input:focus': {
+            border: '1px solid #4ade80',
+            boxShadow: 'none',
+          },
+          '.Tab': {
+            backgroundColor: '#111111',
+            border: '1px solid #2a2a2a',
+            color: '#888888',
+          },
+          '.Tab--selected': {
+            backgroundColor: '#111111',
+            border: '1px solid #4ade80',
+            color: '#ffffff',
+          },
+          '.Tab:hover': { color: '#ffffff' },
+          '.Label': {
+            color: '#888888',
+            fontSize: '12px',
+            letterSpacing: '0.05em',
+          },
+          '.Error': { color: '#ff4d4d' },
+        },
+      },
+    });
+
+    setTimeout(() => {
+      const paymentElement = this.elements!.create('payment', {
+        layout: 'tabs',
+        paymentMethodOrder: ['card'],
+      });
+      paymentElement.mount('#payment-element');
+      this.cdr.detectChanges();
+    });
   }
 
   async pay() {

@@ -4,7 +4,7 @@ import { ProductDetailTest } from "./core/features/products/components/product-d
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProductDetailTest],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
