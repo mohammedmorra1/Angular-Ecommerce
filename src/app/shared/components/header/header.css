@@ -1,11 +1,11 @@
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 40;
   border-bottom: 1px solid var(--border);
-  background: color-mix(in oklab, var(--background) 80%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--background);
 }
 
 .header-inner {

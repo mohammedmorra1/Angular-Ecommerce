@@ -1,4 +1,5 @@
 import { Component, ElementRef, inject, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { StylistSearchService } from '../../../services/stylist-search-service';
 import { Product } from '../../../../../../../Types/type';
 import { Card } from '../../card/card';
@@ -6,7 +7,7 @@ import { ProductService } from '../../../services/productService';
 
 @Component({
   selector: 'app-stylist-search',
-  imports: [Card],
+  imports: [Card, RouterLink],
   templateUrl: './stylist-search.html',
   styleUrl: './stylist-search.css',
 })

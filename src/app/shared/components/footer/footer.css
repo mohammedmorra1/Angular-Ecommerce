@@ -1,8 +1,6 @@
 .site-footer {
   border-top: 1px solid var(--border);
-  background: color-mix(in oklab, var(--background) 80%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--background);
   padding: 1.5rem 2rem;
   text-align: center;
 }

@@ -1,30 +1,28 @@
-<body class="py-5" style="background-color: black">
-  <main class="container text-white bg-black m-auto">
-    <p style="color: #22ff00"><i class="bi bi-camera"></i> Visual Search</p>
-    <p class="fs-1 fw-bold my-0 py-0">Drop an image.</p>
-    <p style="color: gray">We'll surface the closest pieces in our drop.</p>
+<section class="search-page">
+  <div class="search-container">
+    <div class="search-header">
+      <p class="eyebrow"><i class="bi bi-camera"></i> VISUAL SEARCH</p>
+      <h1 class="title">DROP AN IMAGE.</h1>
+      <p class="subtitle">We'll surface the closest pieces in our drop.</p>
+    </div>
+
     @if (sent) {
       @if (uploadedImage == null) {
-        <div class="loading-state mt-4">
+        <div class="loading-state">
           <i class="bi bi-hourglass-split spinning"></i> Uploading...
         </div>
       } @else {
-        <div class="row">
-          <div class="col-12 col-md-4 mb-4">
-            <img [src]="uploadedImage" alt="Uploaded Image" class="image-preview w-100" />
-            <button
-              class="search-again-btn"
-              [style.display]="results.length == 0 ? 'none' : 'block'"
-              (click)="reloadRoute()"
-            >
+        <div class="results-layout">
+          <div class="upload-preview">
+            <img [src]="uploadedImage" alt="Uploaded image" class="preview-image" />
+            <button class="try-again-btn" (click)="reloadRoute()">
               Try Another
             </button>
           </div>
           @if (results.length > 0) {
-            <div class="col-12 row">
+            <div class="results-grid">
               @for (i of results; track i.id) {
-                <div class="col-6 col-md-4 col-lg-3">
-                  <!-- <img [src]="i.imageUrl" alt="{{ i.title }}" class="w-100" /> -->
+                <div class="result-item">
                   <app-card [cardProduct]="i"></app-card>
                 </div>
               }
@@ -38,10 +36,15 @@
       }
     } @else {
       <div class="upload-box" onclick="document.getElementById('formFile').click()">
-        <i class="bi bi-cloud-upload fs-1 mb-3"></i>
-        <p>Click or drag an image here to search</p>
+        <i class="bi bi-cloud-upload upload-icon"></i>
+        <p class="upload-text">Click or drag an image here to search</p>
         <input type="file" id="formFile" (change)="sendImage($event); this.sent = true" />
       </div>
     }
-  </main>
-</body>
+
+    <p class="cross-link">
+      Or would you like a
+      <a routerLink="/stylist">text search</a> instead?
+    </p>
+  </div>
+</section>

@@ -3,11 +3,11 @@ import { StylistSearchService } from '../../../services/stylist-search-service';
 import { Product } from '../../../../../../../Types/type';
 import { compressImage } from '../../../utils';
 import { Card } from '../../card/card';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ProductService } from '../../../services/productService';
 @Component({
   selector: 'app-visual-search',
-  imports: [Card],
+  imports: [Card, RouterLink],
   templateUrl: './visual-search.html',
   styleUrl: './visual-search.css',
 })

@@ -1,11 +1,13 @@
-<div class="py-5" style="background-color: black">
-  <div class="container text-white bg-black w-75 m-auto">
-    <p style="color: #22ff00"><i class="bi bi-stars"></i> AI Stylist</p>
-    <p class="fs-1 fw-bold my-0 py-0">What's the occasion?</p>
-    <p style="color: gray">Describe the vibe — your fit will appear.</p>
+<section class="search-page">
+  <div class="search-container">
+    <div class="search-header">
+      <p class="eyebrow"><i class="bi bi-stars"></i> AI STYLIST</p>
+      <h1 class="title">WHAT'S THE OCCASION?</h1>
+      <p class="subtitle">Describe the vibe — your fit will appear.</p>
+    </div>
 
     @if (searchTexts.length > 0) {
-      <div class="chat-history mt-4" #chatHistory>
+      <div class="chat-history" #chatHistory>
         @for (text of searchTexts; track $index) {
           <div class="chat-message">
             <div class="chat-query">
@@ -19,21 +21,15 @@
                     <i class="bi bi-hourglass-split spinning"></i> Thinking of your fit...
                   </div>
                 } @else if (searchResults[text] && searchResults[text]!.length > 0) {
-                  <div class="image-grid justify-content-around">
+                  <div class="results-grid">
                     @for (result of searchResults[text]; track result) {
-                      <div class="col-12 col-md-3">
-                        <!-- <img
-                          class="image-item"
-                          src="{{ result }}"
-                          alt="Style suggestion"
-                          class="image-preview"
-                        /> -->
+                      <div class="result-item">
                         <app-card [cardProduct]="result"></app-card>
                       </div>
                     }
                   </div>
                 } @else {
-                  <div class="text-secondary">No style suggestions available.</div>
+                  <div class="no-results">No style suggestions available.</div>
                 }
               </div>
             </div>
@@ -43,28 +39,23 @@
     }
 
     <form
-      class="row bg-dark p-1 my-2 g-1 bg-card border border-secondary"
+      class="search-bar"
       (submit)="$event.preventDefault(); getResults(occasion.value); occasion.value = ''"
     >
-      <div class="col-10">
-        <input
-          #occasion
-          type="text"
-          class="w-100"
-          placeholder="e.g. 80s party, brunch with friends, beach day"
-          style="background-color: transparent; color: white; border: none; padding: 10px"
-        />
-      </div>
-      <div class="col-2 d-flex justify-content-end">
-        <button
-          class="btn"
-          style="background-color: #22ff00; border-radius: 0%"
-          type="submit"
-          [disabled]="isLoading"
-        >
-          <i class="bi bi-send" style="font-weight: bold; color: black"></i>
-        </button>
-      </div>
+      <input
+        #occasion
+        type="text"
+        class="search-input"
+        placeholder="e.g. 80s party, brunch with friends, beach day"
+      />
+      <button class="search-btn" type="submit" [disabled]="isLoading">
+        <i class="bi bi-send"></i>
+      </button>
     </form>
+
+    <p class="cross-link">
+      Or would you like a
+      <a routerLink="/visual-search">visual search</a> instead?
+    </p>
   </div>
-</div>
+</section>
