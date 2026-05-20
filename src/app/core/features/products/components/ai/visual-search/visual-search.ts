@@ -1,6 +1,6 @@
 import { Component, ElementRef, inject, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
 import { StylistSearchService } from '../../../services/stylist-search-service';
-import { Product } from '../../../../../../type';
+import { Product } from '../../../../../../../Types/type';
 import { compressImage } from '../../../utils';
 import { Card } from '../../card/card';
 import { Router } from '@angular/router';
