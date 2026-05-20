@@ -8,4 +8,5 @@ export const environment = {
   ImageModel: 'mistral-small-2603',
   TextModel: 'mistral-large-latest',
   paymentApiUrl: 'http://localhost:5199/api/payments',
+  stripePublicKey: 'STRIPE_PUBLIC_KEY'
 };

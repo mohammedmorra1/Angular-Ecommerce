@@ -1,4 +1,4 @@
-import { Product } from '../../../type';
+import { Product } from '../../../../Types/type';
 
 export function compressImage(
   file: File,
