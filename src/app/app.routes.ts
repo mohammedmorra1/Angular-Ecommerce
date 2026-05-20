@@ -56,7 +56,23 @@ export const routes: Routes = [
   {
     path: 'product/:id',
     loadComponent: () =>
-      import('./core/features/products/components/product-detail/product-detail').then((m) => m.ProductDetail),
+      import('./core/features/products/components/product-detail/product-detail').then(
+        (m) => m.ProductDetail,
+      ),
+  },
+  {
+    path: 'stylist',
+    loadComponent: () =>
+      import('./core/features/products/components/ai/stylist-search/stylist-search').then(
+        (m) => m.StylistSearch,
+      ),
+  },
+  {
+    path: 'visual-search',
+    loadComponent: () =>
+      import('./core/features/products/components/ai/visual-search/visual-search').then(
+        (m) => m.VisualSearch,
+      ),
   },
   {
     path: '**',
