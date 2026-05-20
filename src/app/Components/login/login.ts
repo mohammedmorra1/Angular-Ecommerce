@@ -29,4 +29,13 @@ export class Login {
         this.invalidCredentials = true;
       }
   }
+
+  async googleSignIn() {
+    try {
+      await this.authService.signInWithGoogle();
+    } catch (e) {
+      console.error('Google sign-in failed', e);
+      this.invalidCredentials = true;
+    }
+  }
 }

@@ -6,6 +6,7 @@ import { Shop } from './core/features/products/components/shop/shop';
 import { Checkout } from './core/features/products/components/checkout/checkout';
 import {PaymentSuccess} from './core/features/products/components/payment-success/payment-success';
 import { authGuard } from './Guard/auth/auth-guard';
+import { AuthCallback } from './Components/auth-callback/auth-callback';
 export const routes: Routes = [
   {
     path: '',
@@ -43,6 +44,10 @@ export const routes: Routes = [
     path: 'resetpassword',
     loadComponent: () =>
       import('./Components/reset-password/reset-password').then((m) => m.ResetPassword),
+  },
+  {
+    path: 'auth/callback',
+    component: AuthCallback,
   },
   {
     path: 'checkout',

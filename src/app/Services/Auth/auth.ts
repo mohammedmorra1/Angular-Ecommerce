@@ -69,4 +69,21 @@ export class AuthService {
     await this.client.from('Users').update({password : newPassword}).eq('email' , email).select();
   }
 
+  async signInWithGoogle() {
+    const { data, error } = await this.client.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin + '/auth/callback'
+      }
+    });
+    if (error) throw error;
+    return data;
+  }
+
+  async getGoogleUser() {
+    const { data, error } = await this.client.auth.getUser();
+    if (error) throw error;
+    return data.user;
+  }
+
 }
