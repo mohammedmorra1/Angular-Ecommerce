@@ -1,1 +1,1 @@
-export const baseUrl = "https://orckeckzioqckmlaejlq.supabase.co";
+export const baseUrl = "https://xckhkeelnhlalcckuwkn.supabase.co";
