@@ -18,8 +18,8 @@
   right: -480px;
   width: 420px;
   height: 100vh;
-  background: #111;
-  color: #fff;
+  background: var(--card);
+  color: var(--foreground);
   display: flex;
   flex-direction: column;
   transition: right 0.35s ease;
@@ -39,26 +39,32 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 1.5rem 1rem;
-  border-bottom: 1px solid #2a2a2a;
+  border-bottom: 1px solid var(--border);
 
   h2 {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 1.1rem;
     font-weight: 500;
     margin: 0;
   }
 
   .close-btn {
-    background: #1e1e1e;
-    border: 1px solid #333;
-    color: #fff;
+    background: var(--accent);
+    border: 1px solid var(--border);
+    color: var(--foreground);
     width: 32px;
     height: 32px;
-    border-radius: 4px;
+    border-radius: var(--radius);
     font-size: 1.2rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: border-color 0.2s;
+  }
+
+  .close-btn:hover {
+    border-color: var(--neon);
   }
 }
 
@@ -72,14 +78,14 @@
   display: flex;
   gap: 1rem;
   padding: 1rem 0;
-  border-bottom: 1px solid #1e1e1e;
+  border-bottom: 1px solid var(--border);
 
   .item-img {
     width: 80px;
     height: 80px;
     object-fit: cover;
-    border-radius: 6px;
-    background: #1a1a1a;
+    border-radius: var(--radius);
+    background: var(--background);
   }
 
   .item-details {
@@ -96,27 +102,32 @@
   }
 
   .item-name {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 0.95rem;
     font-weight: 500;
     margin: 0;
   }
 
   .item-size {
-    font-size: 0.75rem;
-    color: #888;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted-foreground);
     margin: 2px 0 0;
   }
 
   .remove-btn {
     background: none;
     border: none;
-    color: #888;
+    color: var(--muted-foreground);
     font-size: 1.1rem;
     cursor: pointer;
     padding: 0;
     line-height: 1;
+    transition: color 0.2s;
 
-    &:hover { color: #fff; }
+    &:hover { color: var(--foreground); }
   }
 
   .item-bottom {
@@ -133,15 +144,17 @@
     button {
       background: none;
       border: none;
-      color: #fff;
+      color: var(--foreground);
       font-size: 1rem;
       cursor: pointer;
       padding: 0 4px;
+      transition: color 0.2s;
 
-      &:hover { color: #4ade80; }
+      &:hover { color: var(--neon); }
     }
 
     span {
+      font-family: 'JetBrains Mono', monospace;
       font-size: 0.9rem;
       min-width: 16px;
       text-align: center;
@@ -149,6 +162,7 @@
   }
 
   .item-price {
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.95rem;
     font-weight: 500;
   }
@@ -156,52 +170,69 @@
 
 .empty-cart {
   text-align: center;
-  color: #555;
+  color: var(--muted-foreground);
   margin-top: 3rem;
   font-size: 0.9rem;
 }
 
 .cart-footer {
   padding: 1.25rem 1.5rem;
-  border-top: 1px solid #2a2a2a;
+  border-top: 1px solid var(--border);
 
   .subtotal {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-    font-size: 0.8rem;
-    color: #aaa;
-    letter-spacing: 0.05em;
+
+    span:first-child {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted-foreground);
+    }
 
     .subtotal-price {
+      font-family: 'JetBrains Mono', monospace;
       font-size: 1.5rem;
-      font-weight: 600;
-      color: #fff;
+      font-weight: 700;
+      color: var(--foreground);
     }
   }
 
   .checkout-btn {
     width: 100%;
-    background: #4ade80;
-    color: #000;
+    background: var(--neon);
+    color: var(--neon-foreground);
     border: none;
-    padding: 0.9rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border-radius: 6px;
+    padding: 0.875rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: var(--radius);
     cursor: pointer;
-    transition: background 0.2s;
-    letter-spacing: 0.03em;
+    transition: opacity 0.2s;
+  }
 
-    &:hover { background: #22c55e; }
+  .checkout-btn:hover {
+    opacity: 0.9;
+  }
+
+  .checkout-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 
   .shipping-note {
     text-align: center;
-    font-size: 0.72rem;
-    color: #555;
-    margin: 0.75rem 0 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
     letter-spacing: 0.05em;
+    color: var(--muted-foreground);
+    margin: 0.75rem 0 0;
   }
 }

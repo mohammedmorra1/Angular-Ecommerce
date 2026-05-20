@@ -1,39 +1,87 @@
-.product-card {
-  transition: all 0.3s ease;
+.shop-page {
+  background-color: var(--background);
+  min-height: 100vh;
+  padding: 3rem 1rem;
 }
 
-.product-card:hover {
-  transform: translateY(-5px);
-  border: 1px solid #22ff00;
+@media (min-width: 768px) {
+  .shop-page {
+    padding: 3rem 2rem;
+  }
 }
 
-.product-img {
-  aspect-ratio: 4/5;
-  object-fit: cover;
-  transition: transform 0.6s ease;
+.shop-header {
+  max-width: 1280px;
+  margin: 0 auto 2rem;
 }
 
-.product-card:hover .product-img {
-  transform: scale(1.05);
-}
-
-.quick-view {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #22ff00;
-  color: black;
-  text-align: center;
-  font-size: 11px;
-  font-weight: bold;
+.shop-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 6px;
-  transform: translateY(100%);
-  transition: 0.3s;
+  letter-spacing: 0.15em;
+  color: var(--neon);
+  margin: 0 0 0.5rem;
 }
 
-.product-card:hover .quick-view {
-  transform: translateY(0);
+.shop-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  margin: 0 0 1.5rem;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .shop-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .shop-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.shop-grid-item {
+  min-width: 0;
+}
+
+.shop-loadmore {
+  text-align: center;
+  margin-top: 2rem;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.shop-loadmore-btn {
+  padding: 0.75rem 2rem;
+  background: var(--neon);
+  color: var(--neon-foreground);
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.shop-loadmore-btn:hover {
+  opacity: 0.9;
 }

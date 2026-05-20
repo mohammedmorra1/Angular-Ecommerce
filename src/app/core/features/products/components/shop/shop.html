@@ -1,33 +1,21 @@
-<main class="container py-5 text-white bg-black" style="background-color: black;">
-    <div class="mb-4">
+<main class="shop-page">
+  <div class="shop-header">
+    <p class="shop-eyebrow">CATALOGUE</p>
+    <h1 class="shop-title">EVERYTHING</h1>
+    <app-tabs (selectedCategory)="selector($event)"></app-tabs>
+  </div>
 
-      <p class="text-uppercase small fw-bold mb-2" style="letter-spacing:3px; color:#22ff00;">
-        Catalogue
-      </p>
-
-      <h1 class="display-5 fw-bold mb-3">
-        Everything
-      </h1>
-
-      <app-tabs (selectedCategory)="selector($event)"></app-tabs>
-    </div>
-
-
-    <div class="row g-4">
-
-      @for (item of products(); track item.id) {
-        <div class="col-6 col-md-4 col-lg-3">
-          <app-card [cardProduct]="item"></app-card>
-        </div>
-      }
-
-    </div>
-
-    @if(hasMore()){
-      <div class="text-center mt-4">
-        <button (click)="loadMore()" class="btn px-4 py-2 fw-bold" style="background-color:#22ff00; color:black;">
-          Load More
-        </button>
+  <div class="shop-grid">
+    @for (item of products(); track item.id) {
+      <div class="shop-grid-item">
+        <app-card [cardProduct]="item"></app-card>
       </div>
     }
-  </main>
+  </div>
+
+  @if(hasMore()){
+    <div class="shop-loadmore">
+      <button (click)="loadMore()" class="shop-loadmore-btn">LOAD MORE</button>
+    </div>
+  }
+</main>

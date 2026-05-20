@@ -6,6 +6,11 @@ import { CartItem, Product } from '../../../../../Types/type';
 })
 export class CartService {
   cartItems = signal<CartItem[]>([]);
+  cartOpen = signal<boolean>(false);
+
+  closeCart() {
+    this.cartOpen.set(false);
+  }
 
   addToCart(product: Product, size: string, quantity: number = 1) {
     this.cartItems.update(items => {

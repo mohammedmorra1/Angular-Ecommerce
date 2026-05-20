@@ -1,30 +1,30 @@
-<div style="background-color: black;">
-<section class="container-fluid bg-black text-white">
+<div class="home-wrapper">
+<section class="hero">
 
   <div class="row min-vh-100">
 
     <div class="col-lg-6 d-flex flex-column justify-content-center p-5">
-      <p class="text-uppercase small text-secondary">
+      <p class="hero-eyebrow">
         Drop 04 — Live now
       </p>
 
-      <h1  class="display-1 fw-bold lh-1 hero-title">
+      <h1 class="hero-title">
         BUILT<br>
         FOR THE<br>
-        <span style="color:#22ff00" class="fst-italic text-neon fst-italic">after</span>dark.
+        <span class="hero-accent">after</span>dark.
       </h1>
 
-      <p class="text-secondary mt-3">
+      <p class="hero-body">
         Brutalist silhouettes, technical fabrics, neon aesthetic.
       </p>
 
       <div class="d-flex gap-3 mt-4">
-        <a style="background-color:#22ff00" class="btn px-4 py-3 fw-bold" routerLink="/shop">
-          Shop the drop
+        <a class="hero-cta" routerLink="/shop">
+          SHOP THE DROP →
         </a>
 
-        <a class="btn btn-outline-light px-4 py-3" routerLink="/stylist">
-          AI Stylist
+        <a class="hero-cta-secondary" routerLink="/stylist">
+          AI STYLIST
         </a>
       </div>
 
@@ -39,7 +39,7 @@
 
   </div>
 
-  <div class="text-black py-2 overflow-hidden position-absolute bottom-0 start-0 w-100 slide">
+  <div class="marquee-strip">
 
     <div class="marquee-wrapper">
       <div class="marquee">
@@ -62,24 +62,24 @@
 
 </section>
 
-<section class="container py-5">
+<section class="home-features container py-5">
   <div class="row g-4">
     <div class="col-12 col-md-4">
       <a href="/stylist"
-        class="d-block border border-dark p-4 h-100 text-decoration-none text-white hover-card">
+        class="feature-card">
 
-        <i class="bi bi-stars fs-4" style="color: #22ff00;"></i>
+        <i class="bi bi-stars fs-4 feature-icon"></i>
 
-        <h3 class="mt-4 fw-bold">
+        <h3 class="feature-title">
           AI Stylist
         </h3>
 
-        <p class="mt-2 small" style="color:rgba(245, 245, 220, 0.572) ;">
+        <p class="feature-desc">
           Tell it the occasion. Get a head-to-toe look from real inventory.
         </p>
 
-        <p class="mt-4 small text-uppercase fw-bold d-inline-flex align-items-center gap-1">
-          Open <i class="bi bi-arrow-right"></i>
+        <p class="feature-link">
+          OPEN <i class="bi bi-arrow-right"></i>
         </p>
 
       </a>
@@ -87,20 +87,20 @@
 
     <div class="col-12 col-md-4">
       <a href="/visual-search"
-         class="d-block border border-dark p-4 h-100 text-decoration-none text-white hover-card">
+         class="feature-card">
 
-        <i class="bi bi-camera fs-4" style="color: #22ff00;"></i>
+        <i class="bi bi-camera fs-4 feature-icon"></i>
 
-        <h3 class="mt-4 fw-bold">
+        <h3 class="feature-title">
           Visual Search
         </h3>
 
-        <p class="mt-2 small" style="color:rgba(245, 245, 220, 0.572) ;">
+        <p class="feature-desc">
           Drop an image. We surface the closest pieces in our drop.
         </p>
 
-        <p class="mt-4 small text-uppercase fw-bold d-inline-flex align-items-center gap-1">
-          Open <i class="bi bi-arrow-right"></i>
+        <p class="feature-link">
+          OPEN <i class="bi bi-arrow-right"></i>
         </p>
 
       </a>
@@ -108,20 +108,20 @@
 
     <div class="col-12 col-md-4">
       <a href="/auth"
-         class="d-block border border-dark p-4 h-100 text-decoration-none text-white hover-card">
+         class="feature-card">
 
-        <i class="bi bi-shield-check fs-4" style="color: #22ff00;"></i>
+        <i class="bi bi-shield-check fs-4 feature-icon"></i>
 
-        <h3 class="mt-4 fw-bold">
+        <h3 class="feature-title">
           Members Vault
         </h3>
 
-        <p class="mt-2 small" style="color:rgba(245, 245, 220, 0.572)">
+        <p class="feature-desc">
           Sign in to save fits, track orders, get early drops.
         </p>
 
-        <p class="mt-4 small text-uppercase fw-bold d-inline-flex align-items-center gap-1">
-          Open <i class="bi bi-arrow-right"></i>
+        <p class="feature-link">
+          OPEN <i class="bi bi-arrow-right"></i>
         </p>
 
       </a>
@@ -133,21 +133,20 @@
   <div class="d-flex justify-content-between align-items-end mb-4">
 
     <div>
-      <p class="text-uppercase small mb-1" style="letter-spacing:3px; color:#39ff14;">
+      <p class="section-eyebrow">
         Featured
       </p>
 
-      <h2 class="display-4 fw-bold text-white mb-0">
+      <h2 class="section-title">
         The drop.
       </h2>
     </div>
 
-    <a 
+    <a
       routerLink="/shop"
-      class="d-none d-md-inline-flex align-items-center gap-1 text-decoration-none text-white small text-uppercase fw-bold"
-      style="letter-spacing:2px;"
+      class="section-link"
     >
-      View all
+      VIEW ALL
       <i class="bi bi-arrow-right"></i>
     </a>
   </div>
@@ -164,4 +163,3 @@
 </section>
 
 </div>
-
