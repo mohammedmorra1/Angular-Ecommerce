@@ -1,17 +1,4 @@
 <div class="page">
-  <nav class="navbar">
-    <span class="logo">VANTA/</span>
-    <div class="nav-links">
-      <a routerLink="/shop">Shop</a>
-    </div>
-    <button class="cart-icon-btn" (click)="cartOpen = true">
-      🛍
-      @if (cartService.getCartItems().length > 0) {
-        <span class="badge">{{ cartService.getCartItems().length }}</span>
-      }
-    </button>
-  </nav>
-
   <div class="back-link" (click)="goBack()">← BACK TO SHOP</div>
 
   @if (product(); as p) {

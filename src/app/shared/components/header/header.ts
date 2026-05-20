@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { CartService } from '../../../core/features/products/services/cart-service';
 
 @Component({
@@ -10,6 +10,7 @@ import { CartService } from '../../../core/features/products/services/cart-servi
 })
 export class AppHeader {
   cartService = inject(CartService);
+  router = inject(Router);
   menuOpen = signal(false);
 
   isLoggedIn(): boolean {
@@ -26,5 +27,11 @@ export class AppHeader {
 
   closeMenu() {
     this.menuOpen.set(false);
+  }
+
+  logout() {
+    localStorage.removeItem('username');
+    this.closeMenu();
+    this.router.navigate(['/home']);
   }
 }

@@ -19,6 +19,7 @@
 
       @if (isLoggedIn()) {
         <span class="user-name">{{ username }}</span>
+        <button class="logout-btn desktop-only" (click)="logout()">LOGOUT</button>
       } @else {
         <a class="nav-link desktop-only" routerLink="/login">SIGN IN</a>
       }
@@ -35,6 +36,8 @@
       <a class="mobile-link" routerLink="/stylist" (click)="closeMenu()">AI STYLIST</a>
       @if (!isLoggedIn()) {
         <a class="mobile-link" routerLink="/login" (click)="closeMenu()">SIGN IN</a>
+      } @else {
+        <button class="mobile-link mobile-logout" (click)="logout()">LOGOUT</button>
       }
     </nav>
   }

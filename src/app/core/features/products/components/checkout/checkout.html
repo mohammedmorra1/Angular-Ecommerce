@@ -1,23 +1,10 @@
 <div class="page">
-
-  <nav class="navbar">
-    <span class="logo">VANTA/</span>
-    <div class="nav-links">
-      <a href="#">Shop</a>
-      <a href="#">Outerwear</a>
-      <a href="#">Footwear</a>
-      <a href="#">✦ AI Stylist</a>
-    </div>
-  </nav>
-
   <div class="checkout-wrapper">
     <h1 class="page-title">Checkout</h1>
 
     <div class="checkout-grid">
-
       <!-- LEFT COLUMN -->
       <div class="left-col">
-
         <!-- Shipping / Payment -->
         <div class="card">
           <p class="card-label">SHIPPING</p>
@@ -44,16 +31,10 @@
 
           @for (item of cartItems; track item.product.id + '-' + item.selectedSize) {
             <div class="order-item">
-              <img
-                [src]="item.product.imageUrl"
-                [alt]="item.product.title"
-                class="item-img"
-              />
+              <img [src]="item.product.imageUrl" [alt]="item.product.title" class="item-img" />
               <div class="item-info">
                 <p class="item-name">{{ item.product.title }}</p>
-                <p class="item-meta">
-                  Size {{ item.selectedSize }} · Qty {{ item.quantity }}
-                </p>
+                <p class="item-meta">Size {{ item.selectedSize }} · Qty {{ item.quantity }}</p>
               </div>
               <span class="item-price">
                 ${{ (item.product.currentPrice * item.quantity).toFixed(2) }}
@@ -65,13 +46,11 @@
             <p class="empty-msg">Your cart is empty.</p>
           }
         </div>
-
       </div>
 
       <!-- RIGHT COLUMN -->
       <div class="right-col">
         <div class="card summary-card">
-
           <div class="summary-row">
             <span class="summary-label">SUBTOTAL</span>
             <span class="summary-value">${{ subtotal.toFixed(2) }}</span>
@@ -92,7 +71,8 @@
           <button
             class="place-order-btn"
             (click)="pay()"
-            [disabled]="loading || cartItems.length === 0">
+            [disabled]="loading || cartItems.length === 0"
+          >
             @if (loading) {
               Processing...
             } @else {
@@ -101,10 +81,8 @@
           </button>
 
           <p class="secure-note">SECURE · ENCRYPTED</p>
-
         </div>
       </div>
-
     </div>
   </div>
 </div>
