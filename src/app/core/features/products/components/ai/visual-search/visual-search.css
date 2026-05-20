@@ -1,0 +1,32 @@
+.upload-box {
+  border: 2px dashed #555;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload-box:hover {
+  background-color: #222;
+  color: #22ff00;
+
+  border-color: #22ff00;
+}
+
+.upload-box input[type='file'] {
+  display: none; /* Hide the default file input */
+}
+
+.search-again-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: smaller;
+  border: 1px solid #555;
+  background-color: #000;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
+
+.search-again-btn:hover {
+  border-color: #22ff00;
+}

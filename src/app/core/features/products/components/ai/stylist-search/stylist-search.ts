@@ -1,10 +1,11 @@
 import { Component, ElementRef, inject, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { StylistSearchService } from '../../../services/stylist-search-service';
 import { Product } from '../../../../../../../Types/type';
+import { Card } from '../../card/card';
 
 @Component({
   selector: 'app-stylist-search',
-  imports: [],
+  imports: [Card],
   templateUrl: './stylist-search.html',
   styleUrl: './stylist-search.css',
 })
@@ -16,7 +17,7 @@ export class StylistSearch {
 
   occasion: string = '';
   searchTexts: string[] = [];
-  searchResults: Record<string, string[] | null> = {};
+  searchResults: Record<string, Product[] | null> = {};
   isLoading = false;
 
   async getResults(occasion: string) {
@@ -42,7 +43,7 @@ export class StylistSearch {
 
       this.searchResults = {
         ...this.searchResults,
-        [occasion]: (results as Product[]).map((p) => p.imageUrl),
+        [occasion]: results as Product[],
       };
     } catch (error) {
       console.error('Stylist search failed:', error);
