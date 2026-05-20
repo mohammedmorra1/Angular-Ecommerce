@@ -19,6 +19,7 @@ export class Checkout implements OnInit, AfterViewInit {
   message = '';
   shippingCost = 12;
   private clientSecret = '';
+  stripeLoading = true;  
 
   constructor(
     private cartService: CartService,

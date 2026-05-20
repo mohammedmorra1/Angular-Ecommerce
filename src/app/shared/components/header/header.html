@@ -12,8 +12,8 @@
     <div class="header-right">
       <button class="cart-btn" (click)="cartService.cartOpen.update(v => !v)">
         <i class="bi bi-bag"></i>
-        @if (cartService.cartItems().length > 0) {
-          <span class="cart-badge">{{ cartService.cartItems().length }}</span>
+        @if (cartService.cartItems.length > 0) {
+          <span class="cart-badge">{{ cartService.cartItems.length }}</span>
         }
       </button>
 

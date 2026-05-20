@@ -15,9 +15,9 @@ export class OrderService {
   constructor(private cartService: CartService) {}
 
   createOrder(paymentIntentId: string): Order {
-    const cartItems = this.cartService.cartItems();
+    const cartItems = this.cartService.getCartItems();
     const shippingCost = 12;
-    const subtotal = this.cartService.totalPrice();
+    const subtotal = this.cartService.getTotalPrice();
 
     const orderItems: OrderItem[] = cartItems.map((item) => ({
       productId: item.product.id,

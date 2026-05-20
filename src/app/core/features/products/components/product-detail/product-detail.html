@@ -6,8 +6,8 @@
     </div>
     <button class="cart-icon-btn" (click)="cartOpen = true">
       🛍
-      @if (cartService.cartItems().length > 0) {
-        <span class="badge">{{ cartService.cartItems().length }}</span>
+      @if (cartService.getCartItems().length > 0) {
+        <span class="badge">{{ cartService.getCartItems().length }}</span>
       }
     </button>
   </nav>
