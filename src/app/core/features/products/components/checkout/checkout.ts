@@ -39,11 +39,16 @@ export class Checkout implements AfterViewInit {
     try {
       // load stripe + call API at the same time
       const [stripeInstance, response] = await Promise.all([
-        loadStripe('STRIPE_PUBLIC_KEY'),
-        this.http.post<{ clientSecret: string }>(
-          'http://localhost:5199/api/payments/create-payment-intent',
-          { amount }
-        ).toPromise()
+        loadStripe(
+          'STRIPE_PUBLIC_KEY',
+        ),
+        this.http
+          .post<{ clientSecret: string }>(
+            // 'http://localhost:5199/api/payments/create-payment-intent', for local server testing
+            'http://localhost:5000/api/payments/create-payment-intent', // for public server
+            { amount },
+          )
+          .toPromise(),
       ]);
 
       if (!stripeInstance || !response) {
@@ -107,7 +112,6 @@ export class Checkout implements AfterViewInit {
       paymentElement.mount('#payment-element');
       this.stripeLoading = false;
       this.cdr.detectChanges();
-
     } catch {
       this.message = 'Could not load payment form';
       this.stripeLoading = false;

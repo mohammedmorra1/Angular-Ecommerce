@@ -31,7 +31,7 @@ export class CartService {
   // ─── CART ACTIONS ──────────────────────────────────────
   addToCart(product: Product, size: string, quantity: number = 1) {
     const existingItem = this.cartItems.find(
-      (item) => item.product.id === product.id && item.selectedSize === size
+      (item) => item.product.id === product.id && item.selectedSize === size,
     );
     if (existingItem) {
       existingItem.quantity += quantity;
@@ -44,12 +44,10 @@ export class CartService {
   removeFromCart(productId: number, selectedSize?: string) {
     if (selectedSize) {
       this.cartItems = this.cartItems.filter(
-        (item) => !(item.product.id === productId && item.selectedSize === selectedSize)
+        (item) => !(item.product.id === productId && item.selectedSize === selectedSize),
       );
     } else {
-      this.cartItems = this.cartItems.filter(
-        (item) => item.product.id !== productId
-      );
+      this.cartItems = this.cartItems.filter((item) => item.product.id !== productId);
     }
     this.saveToStorage();
   }
@@ -69,7 +67,7 @@ export class CartService {
   }
 
   toggleCart() {
-    this.cartOpen.update(val => !val);
+    this.cartOpen.update((val) => !val);
   }
 
   // ─── GETTERS ───────────────────────────────────────────
@@ -84,7 +82,7 @@ export class CartService {
   getTotalPrice(): number {
     return this.cartItems.reduce(
       (total, item) => total + item.product.currentPrice * item.quantity,
-      0
+      0,
     );
   }
 
