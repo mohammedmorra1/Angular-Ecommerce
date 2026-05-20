@@ -1,0 +1,39 @@
+.product-card {
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  border: 1px solid #22ff00;
+}
+
+.product-img {
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.05);
+}
+
+.quick-view {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #22ff00;
+  color: black;
+  text-align: center;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 6px;
+  transform: translateY(100%);
+  transition: 0.3s;
+}
+
+.product-card:hover .quick-view {
+  transform: translateY(0);
+}

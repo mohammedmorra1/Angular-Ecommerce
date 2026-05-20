@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<body class="bg-dark">
+
+  <div class="d-flex justify-content-center pt-2 min-vh-100">
+
+    <div class="rounded border border-light w-25 p-4 ">
+
+      <form [formGroup]="form" (submit)="Signup()">
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label text-light">Email</label>
+          <input formControlName="email" class="form-control">
+
+          @if(form.get('email')?.errors?.['required'] && form.get('email')?.touched){
+            <p class="text-danger m-0">Please enter email</p>
+          }
+
+          @if(form.get('email')?.errors?.['email']){
+            <p class="text-danger m-0">Invalid email</p>
+          }
+        </div>
+
+        <!-- Username -->
+        <div class="mb-3">
+          <label class="form-label text-light">Username</label>
+          <input formControlName="username" class="form-control">
+
+          @if(form.get('username')?.errors?.['required'] && form.get('username')?.touched){
+            <p class="text-danger m-0">Please enter username</p>
+          }
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label class="form-label text-light">Password</label>
+          <input type="password" formControlName="password" class="form-control">
+
+          @if(form.get('password')?.errors?.['required'] && form.get('password')?.touched){
+            <p class="text-danger m-0">Please enter password</p>
+          }
+
+          @if(form.get('password')?.errors?.['minlength'] && form.get('password')?.dirty){
+            <p class="text-danger m-0">Password must have at least 8 characters</p>
+          }
+
+          @if(form.get('password')?.errors?.['pattern'] && form.get('password')?.dirty){
+
+            @if( !/[^a-zA-Z0-9]/.test(form.get('password')?.value!) ){
+              <p class="text-danger m-0">Must contain special character</p>
+            }
+
+            @if( !/[0-9]/.test(form.get('password')?.value!) ){
+              <p class="text-danger m-0">Must contain a digit</p>
+            }
+
+            @if( !/[A-Z]/.test(form.get('password')?.value!) ){
+              <p class="text-danger m-0">Must contain uppercase letter</p>
+            }
+
+            @if( !/[a-z]/.test(form.get('password')?.value!) ){
+              <p class="text-danger m-0">Must contain lowercase letter</p>
+            }
+          }
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mb-3">
+          <label class="form-label text-light">Confirm Password</label>
+          <input type="password" formControlName="confirmPassword" class="form-control">
+
+          @if(form?.errors?.['match']){
+            <p class="text-danger m-0">Passwords must match</p>
+          }
+        </div>
+
+        <!-- Duplicate Email -->
+        @if(duplicateMail){
+          <p class="text-danger">An account already exists for this email</p>
+        }
+
+        <!-- Submit -->
+        <button [disabled]="form?.invalid" class="btn btn-primary w-100 mt-5">
+          Sign up
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>

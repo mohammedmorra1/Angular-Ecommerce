@@ -1,0 +1,30 @@
+<div class="card border-0 overflow-hidden h-100 product-card bg-transparent">
+
+    <div class="position-relative overflow-hidden">
+
+        <img
+            [src]="cardProduct.imageUrl"
+            [alt]="cardProduct.title"
+            loading="lazy"
+            class="card-img-top product-img">
+
+        <div class="quick-view">
+            Quick View
+        </div>
+
+    </div>
+
+    <div class="card-body px-0">
+        <div class="d-flex justify-content-between align-items-start gap-2">
+            <h6 style="color: white;" class="fw-semibold mb-1 text-truncate">
+                {{ cardProduct.title }}
+            </h6>
+            <span style="color: white;" class="small fw-bold">
+                ${{ cardProduct.currentPrice }}
+            </span>
+        </div>
+        <small class="text-uppercase category-text">
+            {{ cardProduct.category }}
+        </small>
+    </div>
+</div>

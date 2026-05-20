@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <body class="bg-dark d-flex justify-content-center align-items-center min-vh-100">
+
+    <div class="form-card">
+      <form (submit)="ValidatePin()">
+
+        <div class="field">
+          <label class="field-label" for="pin">PIN</label>
+          <input [(ngModel)]="pin" name="pin" id="pin" class="form-control">
+
+
+        </div>
+
+        <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+
+      </form>
+    </div>
+
+  </body>
+</html>

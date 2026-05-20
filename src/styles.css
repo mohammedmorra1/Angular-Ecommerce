@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+.hover-card {
+  transition: all 0.3s ease;
+}
+
+.hover-card:hover {
+  border-color: #39ff14 !important;
+  background-color: #111 !important;
+}
+
+html, body {
+  min-height: 100%;
+}
