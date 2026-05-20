@@ -12,7 +12,6 @@ export class CartService {
     this.loadFromStorage();
   }
 
-  // ─── STORAGE ───────────────────────────────────────────
   private saveToStorage() {
     localStorage.setItem('vanta_cart', JSON.stringify(this.cartItems));
   }
@@ -28,7 +27,6 @@ export class CartService {
     }
   }
 
-  // ─── CART ACTIONS ──────────────────────────────────────
   addToCart(product: Product, size: string, quantity: number = 1) {
     const existingItem = this.cartItems.find(
       (item) => item.product.id === product.id && item.selectedSize === size,
@@ -38,7 +36,7 @@ export class CartService {
     } else {
       this.cartItems.push({ product, quantity, selectedSize: size });
     }
-    this.saveToStorage(); // ← was missing
+    this.saveToStorage();
   }
 
   removeFromCart(productId: number, selectedSize?: string) {
@@ -54,10 +52,9 @@ export class CartService {
 
   clearCart() {
     this.cartItems = [];
-    this.saveToStorage(); // ← was missing
+    this.saveToStorage();
   }
 
-  // ─── CART PANEL ────────────────────────────────────────
   openCart() {
     this.cartOpen.set(true);
   }
@@ -70,7 +67,6 @@ export class CartService {
     this.cartOpen.update((val) => !val);
   }
 
-  // ─── GETTERS ───────────────────────────────────────────
   getCartItems(): CartItem[] {
     return this.cartItems;
   }
