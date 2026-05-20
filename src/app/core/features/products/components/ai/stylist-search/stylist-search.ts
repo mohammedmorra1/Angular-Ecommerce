@@ -2,6 +2,7 @@ import { Component, ElementRef, inject, ViewChild, ChangeDetectorRef } from '@an
 import { StylistSearchService } from '../../../services/stylist-search-service';
 import { Product } from '../../../../../../../Types/type';
 import { Card } from '../../card/card';
+import { ProductService } from '../../../services/productService';
 
 @Component({
   selector: 'app-stylist-search',
@@ -10,6 +11,12 @@ import { Card } from '../../card/card';
   styleUrl: './stylist-search.css',
 })
 export class StylistSearch {
+  productService = inject(ProductService);
+  ngOnInit() {
+    this.productService.getProducts();
+  }
+
+  ngonInit() {}
   @ViewChild('chatHistory', { static: false }) chatHistory?: ElementRef<HTMLElement>;
 
   styleSearchService = inject(StylistSearchService);

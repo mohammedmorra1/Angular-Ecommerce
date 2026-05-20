@@ -10,16 +10,9 @@ import { extractTop3Products } from '../utils';
 export class StylistSearchService {
   productService = inject(ProductService);
 
-  private async ensureProductsLoaded() {
-    if (!this.productService.products().length) {
-      // await this.productService.getProductsAsync();
-    }
-  }
-
   catalog: string = '';
 
   async searchText(text: String): Promise<unknown[]> {
-    await this.ensureProductsLoaded();
     const products = this.productService.products();
     console.log('Products for stylist search:', products);
     this.catalog = (products ?? [])
@@ -82,7 +75,6 @@ export class StylistSearchService {
     }
   }
   async searchImage(imageUrl: string): Promise<unknown[]> {
-    await this.ensureProductsLoaded();
     const products = this.productService.products();
     if (!imageUrl) {
       console.log('No image URL provided');
