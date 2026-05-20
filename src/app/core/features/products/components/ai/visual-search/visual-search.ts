@@ -27,20 +27,17 @@ export class VisualSearch {
   async sendImage(event: any) {
     if (this.sent) return;
     this.sent = true;
-    console.log('Image file selected:', event.target.files[0]);
     const file = event.target.files[0];
     if (file) {
       // show wait until image is compressed
       this.uploadedImage = null;
       this.cdr.detectChanges();
       const searchImageUrl = await compressImage(file);
-      console.log('Compressed image URL:', searchImageUrl);
       this.uploadedImage = searchImageUrl;
       this.cdr.detectChanges();
       // get responses
       const res = await this.styleSearchService.searchImage(searchImageUrl);
       this.results = res as Product[];
-      console.log('Search results:', this.results);
       this.cdr.detectChanges();
     }
   }

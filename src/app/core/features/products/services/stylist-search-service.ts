@@ -14,7 +14,6 @@ export class StylistSearchService {
 
   async searchText(text: String): Promise<unknown[]> {
     const products = this.productService.products();
-    console.log('Products for stylist search:', products);
     this.catalog = (products ?? [])
       .map((p) => {
         const priceLabel = p.oldPrice
@@ -23,7 +22,6 @@ export class StylistSearchService {
         return `id: ${p.id} | title: ${p.title} | category: ${p.category} | brand: ${p.brand} | price: ${priceLabel} | sizes: ${p.availableSizes.join(', ')} | tags: ${p.tags.join(', ')} | stock: ${p.stock}`;
       })
       .join('\n');
-    console.log('catalog ', this.catalog);
     const message = `User Search: "${text}"\n\nAnalyze this search prompt. Identify the garment(s), style, color palette, and vibe. Then from the catalog below, return ONLY the 3 most visually similar product IDs as a JSON array of numeric values. Do not include any other text, only the JSON array.\n\nCATALOG:\n${this.catalog}`;
 
     const body = {
@@ -64,23 +62,19 @@ export class StylistSearchService {
         null;
 
       if (typeof content === 'string') {
-        console.log('Mistral search response:', content);
         return extractTop3Products(content, products);
       }
 
       throw new Error('Unexpected Mistral response format');
     } catch (error) {
-      console.error('Mistral text response failed:', error);
       return [];
     }
   }
   async searchImage(imageUrl: string): Promise<unknown[]> {
     const products = this.productService.products();
     if (!imageUrl) {
-      console.log('No image URL provided');
       return [];
     }
-    console.log('Starting image search with URL:');
 
     this.catalog = (products ?? [])
       .map((p) => {
@@ -91,7 +85,6 @@ export class StylistSearchService {
       })
       .join('\n');
 
-    // console.log('catalog ', this.catalog);
     const body = {
       model: environment.ImageModel,
       stream: false,
@@ -118,8 +111,6 @@ export class StylistSearchService {
         },
       ],
     };
-    console.log('Mistral search request body:', body);
-    console.log('Api key ', environment.MistralApiKey);
     try {
       const response = await fetch(environment.MistralApiUrl, {
         method: 'POST',
@@ -129,8 +120,6 @@ export class StylistSearchService {
         },
         body: JSON.stringify(body),
       });
-
-      console.log('response ', response);
 
       if (!response.ok) {
         throw new Error(`Mistral API error: ${response.status}`);
@@ -144,13 +133,11 @@ export class StylistSearchService {
         null;
 
       if (typeof content === 'string') {
-        console.log('Mistral search response:', content);
         return extractTop3Products(content, products);
       }
 
       throw new Error('Unexpected Mistral response format');
     } catch (error) {
-      console.error('Mistral text response failed:', error);
       return [];
     }
   }
