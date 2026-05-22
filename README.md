@@ -97,7 +97,7 @@ src/
 
 - **Node.js** >= 18
 - **Angular CLI** >= 21 (`npm install -g @angular/cli`)
-- **.NET 8 SDK** (to run the PaymentApi backend)
+- **.NETCore v10.0 SDK** (to run the PaymentApi backend)
 - **Stripe account** (test mode)
 - **Supabase project** (with a `Users` table)
 - **Mistral AI API key**
