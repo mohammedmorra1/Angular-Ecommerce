@@ -1,0 +1,35 @@
+services:
+  backend:
+    build:
+      context: ./BE/StripeApi
+    container_name: stripe-api
+    ports:
+      - '5000:5000'
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+    depends_on:
+      - mysql
+
+  frontend:
+    build:
+      context: ./
+    container_name: angular-app
+    ports:
+      - '4200:4200'
+    depends_on:
+      - backend
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ecommerce
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

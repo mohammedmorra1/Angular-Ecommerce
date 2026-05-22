@@ -1,0 +1,50 @@
+<section class="search-page">
+  <div class="search-container">
+    <div class="search-header">
+      <p class="eyebrow"><i class="bi bi-camera"></i> VISUAL SEARCH</p>
+      <h1 class="title">DROP AN IMAGE.</h1>
+      <p class="subtitle">We'll surface the closest pieces in our drop.</p>
+    </div>
+
+    @if (sent) {
+      @if (uploadedImage == null) {
+        <div class="loading-state">
+          <i class="bi bi-hourglass-split spinning"></i> Uploading...
+        </div>
+      } @else {
+        <div class="results-layout">
+          <div class="upload-preview">
+            <img [src]="uploadedImage" alt="Uploaded image" class="preview-image" />
+            <button class="try-again-btn" (click)="reloadRoute()">
+              Try Another
+            </button>
+          </div>
+          @if (results.length > 0) {
+            <div class="results-grid">
+              @for (i of results; track i.id) {
+                <div class="result-item">
+                  <app-card [cardProduct]="i"></app-card>
+                </div>
+              }
+            </div>
+          } @else {
+            <div class="loading-state mt-4">
+              <i class="bi bi-hourglass-split spinning"></i> Thinking...
+            </div>
+          }
+        </div>
+      }
+    } @else {
+      <div class="upload-box" onclick="document.getElementById('formFile').click()">
+        <i class="bi bi-cloud-upload upload-icon"></i>
+        <p class="upload-text">Click or drag an image here to search</p>
+        <input type="file" id="formFile" (change)="sendImage($event); this.sent = true" />
+      </div>
+    }
+
+    <p class="cross-link">
+      Or would you like a
+      <a routerLink="/stylist">text search</a> instead?
+    </p>
+  </div>
+</section>

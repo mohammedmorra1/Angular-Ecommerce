@@ -1,3 +1,97 @@
+.home-wrapper {
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+.hero {
+  position: relative;
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted-foreground);
+  margin: 0 0 1rem;
+}
+
+.hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(3rem, 9vw, 8rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -2px;
+  color: var(--foreground);
+}
+
+.hero-accent {
+  color: var(--neon);
+  font-style: italic;
+}
+
+.hero-body {
+  color: var(--muted-foreground);
+  margin-top: 1rem;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--neon);
+  color: var(--neon-foreground);
+  padding: 1rem 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: opacity 0.2s;
+}
+
+.hero-cta:hover {
+  opacity: 0.9;
+  color: var(--neon-foreground);
+}
+
+.hero-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  padding: 1rem 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.hero-cta-secondary:hover {
+  border-color: var(--neon);
+  color: var(--neon);
+}
+
+.marquee-strip {
+  background: var(--neon);
+  color: var(--neon-foreground);
+  padding: 0.5rem 0;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
 .marquee-wrapper {
   overflow: hidden;
   width: 100%;
@@ -8,6 +102,11 @@
   gap: 15rem;
   width: max-content;
   animation: scroll 15s linear infinite;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 @keyframes scroll {
@@ -19,35 +118,97 @@
   }
 }
 
-
-.slide{
-  background: #22ff00;
+.home-features {
+  max-width: 1280px;
 }
 
+.feature-card {
+  display: block;
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  height: 100%;
+  text-decoration: none;
+  color: var(--foreground);
+  border-radius: var(--radius);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
 
- .hero-title {
-  font-size: clamp(3rem, 9vw, 8rem);
+.feature-card:hover {
+  border-color: var(--neon);
+  background-color: var(--card);
+  color: var(--foreground);
+}
+
+.feature-icon {
+  color: var(--neon);
+}
+
+.feature-title {
+  margin-top: 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--foreground);
+}
+
+.feature-desc {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+
+.feature-link {
+  margin-top: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--foreground);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.section-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--neon);
+  margin: 0 0 0.5rem;
+}
+
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.75rem, 4vw, 3.5rem);
   font-weight: 900;
-  line-height: 0.85;
-  letter-spacing: -2px;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  margin: 0;
 }
 
-.pulse-dot {
-  width: 8px;
-  height: 8px;
-  animation: pulse 1.5s infinite;
+.section-link {
+  display: none;
+  align-items: center;
+  gap: 0.25rem;
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--foreground);
+  transition: color 0.2s;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.6); opacity: 0.5; }
-  100% { transform: scale(1); opacity: 1; }
+@media (min-width: 768px) {
+  .section-link {
+    display: inline-flex;
+  }
 }
 
-
-
-
-
-
-
-
+.section-link:hover {
+  color: var(--neon);
+}

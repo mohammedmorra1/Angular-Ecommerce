@@ -1,0 +1,49 @@
+<div class="page">
+  <div class="back-link" (click)="goBack()">← BACK TO SHOP</div>
+
+  @if (product(); as p) {
+    <div class="product-container">
+      <div class="product-image">
+        <img [src]="p.imageUrl" [alt]="p.title" loading="lazy" />
+      </div>
+
+      <div class="product-info">
+        <p class="category">{{ p.category | uppercase }}</p>
+        <h1 class="title">{{ p.title }}</h1>
+        <p class="price">${{ p.currentPrice.toFixed(2) }}</p>
+        <p class="description">{{ p.description }}</p>
+
+        <div class="size-section">
+          <p class="size-label">SIZE</p>
+          <div class="sizes">
+            @for (size of p.availableSizes; track size) {
+              <button
+                class="size-btn"
+                [class.active]="selectedSize === size"
+                (click)="selectSize(size)"
+              >
+                {{ size }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <button class="add-btn" (click)="addToCart()" [disabled]="!selectedSize">Add to bag</button>
+
+        <div class="perks">
+          <span>FREE OVER $200</span>
+          <span>30 DAY RETURNS</span>
+          <span>AUTHENTIC</span>
+        </div>
+
+        <div class="tags">
+          @for (tag of p.tags; track tag) {
+            <span class="tag">{{ tag }}</span>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+  <app-cart [isOpen]="cartOpen" (closed)="cartOpen = false" />
+</div>

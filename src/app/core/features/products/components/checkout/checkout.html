@@ -1,0 +1,88 @@
+<div class="page">
+  <div class="checkout-wrapper">
+    <h1 class="page-title">Checkout</h1>
+
+    <div class="checkout-grid">
+      <!-- LEFT COLUMN -->
+      <div class="left-col">
+        <!-- Shipping / Payment -->
+        <div class="card">
+          <p class="card-label">SHIPPING</p>
+          <p class="email-display">{{ cartItems[0]?.product?.brand ?? 'Guest' }}</p>
+
+          <div class="divider"></div>
+
+          @if (stripeLoading) {
+            <div class="stripe-loading">
+              <div class="spinner"></div>
+              <p>Loading payment form...</p>
+            </div>
+          }
+          <div id="payment-element" [class.hidden]="stripeLoading"></div>
+
+          @if (message) {
+            <p class="error-msg">{{ message }}</p>
+          }
+        </div>
+
+        <!-- Items -->
+        <div class="card">
+          <p class="card-label">ITEMS</p>
+
+          @for (item of cartItems; track item.product.id + '-' + item.selectedSize) {
+            <div class="order-item">
+              <img [src]="item.product.imageUrl" [alt]="item.product.title" class="item-img" />
+              <div class="item-info">
+                <p class="item-name">{{ item.product.title }}</p>
+                <p class="item-meta">Size {{ item.selectedSize }} · Qty {{ item.quantity }}</p>
+              </div>
+              <span class="item-price">
+                ${{ (item.product.currentPrice * item.quantity).toFixed(2) }}
+              </span>
+            </div>
+          }
+
+          @if (cartItems.length === 0) {
+            <p class="empty-msg">Your cart is empty.</p>
+          }
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="right-col">
+        <div class="card summary-card">
+          <div class="summary-row">
+            <span class="summary-label">SUBTOTAL</span>
+            <span class="summary-value">${{ subtotal.toFixed(2) }}</span>
+          </div>
+
+          <div class="summary-row">
+            <span class="summary-label">SHIPPING</span>
+            <span class="summary-value">${{ shippingCost.toFixed(2) }}</span>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-row">
+            <span class="summary-label total-label">TOTAL</span>
+            <span class="total-amount">${{ total.toFixed(2) }}</span>
+          </div>
+
+          <button
+            class="place-order-btn"
+            (click)="pay()"
+            [disabled]="loading || cartItems.length === 0"
+          >
+            @if (loading) {
+              Processing...
+            } @else {
+              Place order
+            }
+          </button>
+
+          <p class="secure-note">SECURE · ENCRYPTED</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

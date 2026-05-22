@@ -1,4 +1,4 @@
-<div class="card border-0 overflow-hidden h-100 product-card bg-transparent">
+<div class="card border-0 overflow-hidden h-100 product-card bg-transparent" (click)="goToDetail()">
 
     <div class="position-relative overflow-hidden">
 
@@ -9,17 +9,17 @@
             class="card-img-top product-img">
 
         <div class="quick-view">
-            Quick View
+            QUICK VIEW
         </div>
 
     </div>
 
     <div class="card-body px-0">
         <div class="d-flex justify-content-between align-items-start gap-2">
-            <h6 style="color: white;" class="fw-semibold mb-1 text-truncate">
+            <h6 class="card-title mb-1 text-truncate">
                 {{ cardProduct.title }}
             </h6>
-            <span style="color: white;" class="small fw-bold">
+            <span class="card-price">
                 ${{ cardProduct.currentPrice }}
             </span>
         </div>
