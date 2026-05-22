@@ -11,7 +11,7 @@ export const environment = {
   // MistralApiKey: 'MISTRAL_API_KEY_2',
   ImageModel: 'mistral-medium-3.5',
   TextModel: 'mistral-large-latest',
-  paymentApiUrl: 'http://localhost:5199/api/payments',
+  paymentApiUrl: 'http://localhost:5000/api/payments',
   stripePublicKey:
     'STRIPE_PUBLIC_KEY',
 };
