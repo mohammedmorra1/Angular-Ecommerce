@@ -43,7 +43,7 @@ A modern, dark-themed ecommerce application built with **Angular 21**, featuring
 | **State Management** | Angular Signals (`signal()`, `computed()`)                                    |
 | **Product API**      | FakeStore REST API                                                            |
 | **Database / Auth**  | Supabase (PostgreSQL + Google OAuth)                                          |
-| **AI**               | Mistral AI (`mistral-large-latest` for text, `mistral-small-2603` for vision) |
+| **AI**               | Mistral AI (text & vision models)                                             |
 | **Payments**         | Stripe Elements + ASP.NET Core PaymentApi backend                             |
 | **Email**            | EmailJS (password reset PINs)                                                 |
 | **Encryption**       | CryptoJS (SHA-256 password hashing)                                           |
