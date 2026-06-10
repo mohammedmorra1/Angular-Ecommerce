@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
-import { Product } from '../../../../../Types/type';
+import { ApiProduct, Product } from '../../../../../Types/type';
 import { environment } from '../../../../../environments/environment';
 
 @Injectable({
@@ -8,17 +8,17 @@ import { environment } from '../../../../../environments/environment';
 })
 export class ProductService {
   private baseUrl = environment.apiBaseUrl;
-  private mapProduct(apiProduct: any): Product {
+  private mapProduct(apiProduct: ApiProduct): Product {
     return {
-      id: apiProduct._id,
+      id: apiProduct.id,
       title: apiProduct.title,
       category: apiProduct.category,
-      currentPrice: apiProduct.price,
+      currentPrice: apiProduct.currentPrice,
       oldPrice: apiProduct.oldPrice,
       description: apiProduct.description,
-      imageUrl: `${apiProduct.image}?auto=compress&cs=tinysrgb&w=400`,
-      availableSizes: apiProduct.size,
-      tags: ['#streetwear', '#oversized', '#neon', '#statement'],
+      imageUrl: `${apiProduct.imageUrl}?auto=compress&cs=tinysrgb&w=400`,
+      availableSizes: apiProduct.availableSizes,
+      tags: apiProduct.tags,
       stock: apiProduct.stock,
       brand: apiProduct.brand,
       rating: apiProduct.rating,
@@ -33,17 +33,17 @@ export class ProductService {
   hasMore = signal<boolean>(true);
 
   getHomeProducts() {
-    this.http.get<any>(`${this.baseUrl}?limit=8`).subscribe((response: any) => {
-      const mappedProducts = response.data.map((apiProduct: any) => this.mapProduct(apiProduct));
+    this.http.get<ApiProduct[]>(`${this.baseUrl}?limit=8`).subscribe((response) => {
+      const mappedProducts = response.map((apiProduct) => this.mapProduct(apiProduct));
       this.products.set(mappedProducts);
     });
   }
 
   getProducts() {
     this.http
-      .get<any>(`${this.baseUrl}?page=${this.page()}&limit=${this.limit()}`)
-      .subscribe((response: any) => {
-        const mappedProducts = response.data.map((apiProduct: any) => this.mapProduct(apiProduct));
+      .get<ApiProduct[]>(`${this.baseUrl}?page=${this.page()}&limit=${this.limit()}`)
+      .subscribe((response) => {
+        const mappedProducts = response.map((apiProduct) => this.mapProduct(apiProduct));
         this.products.update((prev) => [...prev, ...mappedProducts]);
         if (mappedProducts.length < this.limit()) {
           this.hasMore.set(false);
