@@ -122,22 +122,10 @@ npm install
 
 ### 3. Configure environment variables
 
-Edit `src/environments/environment.ts` with your own API keys:
+Copy `.env.example` to `.env` and fill in your API keys:
 
-```typescript
-export const environment = {
-  production: false,
-  apiBaseUrl: 'YOUR_PRODUCT_API_URL',
-  supabaseUrl: 'YOUR_SUPABASE_URL',
-  supabaseKey: 'YOUR_SUPABASE_ANON_KEY',
-  MistralApiKey: 'YOUR_MISTRAL_API_KEY',
-  MistralModel: 'mistral-large-latest',
-  MistralApiUrl: 'https://api.mistral.ai/v1/chat/completions',
-  ImageModel: 'mistral-small-2603',
-  TextModel: 'mistral-large-latest',
-  paymentApiUrl: 'http://localhost:5199/api/payments',
-  stripePublicKey: 'YOUR_STRIPE_PUBLISHABLE_KEY',
-};
+```bash
+cp .env.example .env
 ```
 
 ### 4. Set up the PaymentApi backend
@@ -190,7 +178,7 @@ Navigate to `http://localhost:4200`.
 npm run build
 ```
 
-Output is in `dist/ecommerce/`. Update `environment.prod.ts` with production keys before building.
+Output is in `dist/ecommerce/`. Environment variables are injected at build time via `.env`.
 
 ---
 
