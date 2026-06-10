@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://fakestoreapiserver.reactbd.org/api/products',
+  apiBaseUrl: 'http://ecommerce-be.runasp.net/api/Product',
   supabaseUrl: 'https://xckhkeelnhlalcckuwkn.supabase.co',
   supabaseKey:
     'SUPABASE_ANON_KEY',
@@ -11,7 +11,7 @@ export const environment = {
   // MistralApiKey: 'MISTRAL_API_KEY_2',
   ImageModel: 'mistral-medium-3.5',
   TextModel: 'mistral-large-latest',
-  paymentApiUrl: 'http://localhost:5000/api/payments',
+  paymentApiUrl: 'http://ecommerce-be.runasp.net/api/Payments/create-payment-intent',
   stripePublicKey:
     'STRIPE_PUBLIC_KEY',
 };
