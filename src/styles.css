@@ -50,6 +50,10 @@
 }
 
 .hover-card:hover {
-  border-color: var(--neon) !important;
-  background-color: var(--card) !important;
+  border-color: #39ff14 !important;
+  background-color: #111 !important;
+}
+
+html, body {
+  min-height: 100%;
 }

@@ -3,6 +3,7 @@ import { Component, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { CartService } from '../../services/cart-service';
+import { environment } from '../../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -42,13 +43,7 @@ export class Checkout implements AfterViewInit {
         loadStripe(
           'STRIPE_PUBLIC_KEY',
         ),
-        this.http
-          .post<{ clientSecret: string }>(
-            // 'http://localhost:5199/api/payments/create-payment-intent', for local server testing
-            'http://localhost:5000/api/payments/create-payment-intent', // for public server
-            { amount },
-          )
-          .toPromise(),
+        this.http.post<{ clientSecret: string }>(environment.paymentApiUrl, { amount }).toPromise(),
       ]);
 
       if (!stripeInstance || !response) {

@@ -1,15 +1,21 @@
-<div class="auth-page">
-  <div class="auth-card">
-    <p class="auth-eyebrow">VANTA/</p>
-    <h1 class="auth-title">ENTER PIN</h1>
+<!DOCTYPE html>
+<html>
+  <body class="bg-dark d-flex justify-content-center align-items-center min-vh-100">
 
-    <form (submit)="ValidatePin()">
-      <div class="form-group">
-        <label class="auth-label" for="pin">PIN CODE</label>
-        <input [(ngModel)]="pin" name="pin" class="auth-input" placeholder="Enter PIN">
-      </div>
+    <div class="form-card">
+      <form (submit)="ValidatePin()">
 
-      <button type="submit" class="auth-btn">SUBMIT</button>
-    </form>
-  </div>
-</div>
+        <div class="field">
+          <label class="field-label" for="pin">PIN</label>
+          <input [(ngModel)]="pin" name="pin" id="pin" class="form-control">
+
+
+        </div>
+
+        <button type="submit" class="btn btn-primary submit-btn">Submit</button>
+
+      </form>
+    </div>
+
+  </body>
+</html>
