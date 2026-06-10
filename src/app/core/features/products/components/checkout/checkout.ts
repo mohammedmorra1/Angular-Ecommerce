@@ -40,9 +40,7 @@ export class Checkout implements AfterViewInit {
     try {
       // load stripe + call API at the same time
       const [stripeInstance, response] = await Promise.all([
-        loadStripe(
-          'STRIPE_PUBLIC_KEY',
-        ),
+        loadStripe(environment.stripePublicKey),
         this.http.post<{ clientSecret: string }>(environment.paymentApiUrl, { amount }).toPromise(),
       ]);
 
