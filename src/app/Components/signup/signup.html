@@ -1,71 +1,97 @@
-<div class="auth-page">
-  <div class="auth-card">
-    <p class="auth-eyebrow">VANTA/</p>
-    <h1 class="auth-title">CREATE ACCOUNT</h1>
+<!DOCTYPE html>
+<html>
 
-    <form [formGroup]="form" (submit)="Signup()">
-      <div class="form-group">
-        <label class="auth-label" for="email">EMAIL</label>
-        <input formControlName="email" class="auth-input" name="email" placeholder="Enter email">
-        @if(form.get('email')?.errors?.['required'] && form.get('email')?.touched){
-          <p class="error-msg">PLEASE ENTER EMAIL</p>
-        }
-        @if(form.get('email')?.errors?.['email']){
-          <p class="error-msg">INVALID EMAIL</p>
-        }
-      </div>
+<body class="bg-dark">
 
-      <div class="form-group">
-        <label class="auth-label" for="username">USERNAME</label>
-        <input formControlName="username" class="auth-input" name="username" placeholder="Enter username">
-        @if(form.get('username')?.errors?.['required'] && form.get('username')?.touched){
-          <p class="error-msg">PLEASE ENTER USERNAME</p>
-        }
-      </div>
+  <div class="d-flex justify-content-center pt-2 min-vh-100">
 
-      <div class="form-group">
-        <label class="auth-label" for="password">PASSWORD</label>
-        <input formControlName="password" class="auth-input" name="password" type="password" placeholder="Enter password">
-        @if(form.get('password')?.errors?.['required'] && form.get('password')?.touched){
-          <p class="error-msg">PLEASE ENTER PASSWORD</p>
-        }
-        @if(form.get('password')?.errors?.['minlength'] && form.get('password')?.dirty){
-          <p class="error-msg">MIN 8 CHARACTERS</p>
-        }
-        @if(form.get('password')?.errors?.['pattern'] && form.get('password')?.dirty){
-          @if( !/[^a-zA-Z0-9]/.test(form.get('password')?.value!) ){
-            <p class="error-msg">NEEDS SPECIAL CHARACTER</p>
+    <div class="rounded border border-light w-25 p-4 ">
+
+      <form [formGroup]="form" (submit)="Signup()">
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label text-light">Email</label>
+          <input formControlName="email" class="form-control">
+
+          @if(form.get('email')?.errors?.['required'] && form.get('email')?.touched){
+            <p class="text-danger m-0">Please enter email</p>
           }
-          @if( !/[0-9]/.test(form.get('password')?.value!) ){
-            <p class="error-msg">NEEDS A DIGIT</p>
+
+          @if(form.get('email')?.errors?.['email']){
+            <p class="text-danger m-0">Invalid email</p>
           }
-          @if( !/[A-Z]/.test(form.get('password')?.value!) ){
-            <p class="error-msg">NEEDS UPPERCASE LETTER</p>
+        </div>
+
+        <!-- Username -->
+        <div class="mb-3">
+          <label class="form-label text-light">Username</label>
+          <input formControlName="username" class="form-control">
+
+          @if(form.get('username')?.errors?.['required'] && form.get('username')?.touched){
+            <p class="text-danger m-0">Please enter username</p>
           }
-          @if( !/[a-z]/.test(form.get('password')?.value!) ){
-            <p class="error-msg">NEEDS LOWERCASE LETTER</p>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label class="form-label text-light">Password</label>
+          <input type="password" formControlName="password" class="form-control">
+
+          @if(form.get('password')?.errors?.['required'] && form.get('password')?.touched){
+            <p class="text-danger m-0">Please enter password</p>
           }
+
+          @if(form.get('password')?.errors?.['minlength'] && form.get('password')?.dirty){
+            <p class="text-danger m-0">Password must have at least 8 characters</p>
+          }
+
+          @if(form.get('password')?.errors?.['pattern'] && form.get('password')?.dirty){
+
+            @if( !/[^a-zA-Z0-9]/.test(form.get('password')?.value!) ){
+              <p class="text-danger m-0">Must contain special character</p>
+            }
+
+            @if( !/[0-9]/.test(form.get('password')?.value!) ){
+              <p class="text-danger m-0">Must contain a digit</p>
+            }
+
+            @if( !/[A-Z]/.test(form.get('password')?.value!) ){
+              <p class="text-danger m-0">Must contain uppercase letter</p>
+            }
+
+            @if( !/[a-z]/.test(form.get('password')?.value!) ){
+              <p class="text-danger m-0">Must contain lowercase letter</p>
+            }
+          }
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mb-3">
+          <label class="form-label text-light">Confirm Password</label>
+          <input type="password" formControlName="confirmPassword" class="form-control">
+
+          @if(form?.errors?.['match']){
+            <p class="text-danger m-0">Passwords must match</p>
+          }
+        </div>
+
+        <!-- Duplicate Email -->
+        @if(duplicateMail){
+          <p class="text-danger">An account already exists for this email</p>
         }
-      </div>
 
-      <div class="form-group">
-        <label class="auth-label" for="confirmPassword">CONFIRM PASSWORD</label>
-        <input formControlName="confirmPassword" class="auth-input" name="confirmPassword" type="password" placeholder="Confirm password">
-        @if(form.errors?.['match']){
-          <p class="error-msg">PASSWORDS MUST MATCH</p>
-        }
-      </div>
+        <!-- Submit -->
+        <button [disabled]="form?.invalid" class="btn btn-primary w-100 mt-5">
+          Sign up
+        </button>
 
-      @if(duplicateMail){
-        <p class="error-msg">ACCOUNT ALREADY EXISTS FOR THIS EMAIL</p>
-      }
+      </form>
 
-      <button [disabled]="form.invalid" class="auth-btn" type="submit">SIGN UP</button>
+    </div>
 
-      <div class="auth-footer">
-        <span class="auth-muted">ALREADY HAVE AN ACCOUNT?</span>
-        <a routerLink="/login" class="auth-link">SIGN IN</a>
-      </div>
-    </form>
   </div>
-</div>
+
+</body>
+
+</html>
