@@ -133,8 +133,7 @@ cp .env.example .env
 Clone the backend API repository:
 
 ```bash
-git clone https://github.com/bassantadel71/ECommerce-Backend-API-.Net.git
-cd ECommerce-Backend-API-.Net
+git clone https://github.com/bassantadel71/backend-ecommerce-final
 ```
 
 Follow the instructions in that repository's README to configure and run the server.
@@ -201,13 +200,3 @@ Output is in `dist/ecommerce/`. Environment variables are injected at build time
 | `/payment-success` | Payment confirmation                       | Yes           |
 
 ---
-
-### Team Members
-
-<!-- Add team members below -->
-
-| Name | Role | GitHub |
-| ---- | ---- | ------ |
-|      |      |        |
-|      |      |        |
-|      |      |        |
